@@ -1,3 +1,6 @@
+import { categories } from "./data/categories";
+import CategoryCard from "./components/CategoryCard";
+
 function App() {
   return (
     <main>
@@ -10,20 +13,11 @@ function App() {
       <section>
         <h2>Featured Categories</h2>
 
-        <div>
-          <h3>Cricket Bats</h3>
-          <p>Hand-selected premium English Willow bats.</p>
-        </div>
-
-        <div>
-          <h3>Batting Gear</h3>
-          <p>Gloves, pads, helmets and protection.</p>
-        </div>
-
-        <div>
-          <h3>Training Equipment</h3>
-          <p>Cones, sidearms, bowling machines and more.</p>
-        </div>
+       {categories.map((category) => (
+        <CategoryCard
+        key={category.id}name={category.name}
+        />
+       ))}
       </section>
       
     </main>
