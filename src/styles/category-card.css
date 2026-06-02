@@ -1,0 +1,27 @@
+.category-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  gap: 20px;
+}
+
+.category-card h3 {
+  margin-bottom: 12px;
+}
+
+.category-card p {
+  margin-bottom: 20px;
+}
+
+.category-card button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+}
+
+.category-card button:hover {
+  opacity: 0.5;
+}
