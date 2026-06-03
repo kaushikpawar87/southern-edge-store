@@ -5,7 +5,11 @@ function Hero() {
         <section className="hero">
         <h1>Southern Edge Cricket</h1>
         <p>Premium cricket equipment for players who demand performance and precision.</p>
-        <button>Shop Now</button>
+        <div> 
+            <button>Shop Now</button>
+            <button>Learn More</button>
+            </div>
+       
       </section>
     );
 }

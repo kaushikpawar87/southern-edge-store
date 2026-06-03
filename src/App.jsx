@@ -1,10 +1,12 @@
 import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
 import { categories } from "./data/categories";
 import CategoryCard from "./components/CategoryCard";
 
 function App() {
   return (
     <main className="container">
+      <Navbar />
       <Hero />
       <section>
         <h2>Featured Categories</h2>
