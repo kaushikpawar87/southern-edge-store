@@ -1,0 +1,22 @@
+.product-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  padding: 20px;
+}
+
+.product-card button {
+  background: #dc2626;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: 6px;
+
+  margin-top: 10px;
+}
