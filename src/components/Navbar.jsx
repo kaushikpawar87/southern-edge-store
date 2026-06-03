@@ -1,5 +1,5 @@
 import "../styles/navbar.css";
-function Navbar() {
+function Navbar({ cartCount }) {
   const links = ["Products", "Brands", "About", "Contact"];
 
   return (
@@ -12,7 +12,7 @@ function Navbar() {
         ))}
       </ul>
 
-      <button className="cart-btn">Cart (0)</button>
+      <button className="cart-btn">Cart ({cartCount})</button>
     </nav>
   );
 }

@@ -4,12 +4,19 @@ import { categories } from "./data/categories";
 import CategoryCard from "./components/CategoryCard";
 import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
+import { useState } from "react";
 
 function App() {
+  const [cartCount, setCartCount] = useState(0);
+
+  function handleAddToCart() {
+    setCartCount((prevCount) => prevCount + 1);
+  }
+
   return (
     <main className="container">
-      <Navbar />
-      <Hero />
+      <Navbar cartCount={cartCount} />
+      <Hero cartCount={cartCount} />
       <section>
         <h2>Featured Categories</h2>
         <div className="category-grid">
@@ -33,6 +40,7 @@ function App() {
               name={product.name}
               brand={product.brand}
               price={product.price}
+              onAddToCart={handleAddToCart}
             />
           ))}
         </div>
