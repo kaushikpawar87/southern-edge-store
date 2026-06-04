@@ -1,18 +1,30 @@
+import { Link } from "react-router-dom";
 import "../styles/navbar.css";
+
 function Navbar({ cartCount }) {
-  const links = ["Products", "Brands", "About", "Contact"];
+  const links = [
+    { label: "Products", path: "/products" },
+    { label: "About", path: "/about" },
+    { label: "Contact", path: "/contact" },
+  ];
 
   return (
     <nav className="navbar">
-      <div className="logo">Southern Edge</div>
+      <Link to="/" className="logo">
+        Southern Edge
+      </Link>
 
       <ul className="nav-links">
         {links.map((link) => (
-          <li key={link}>{link}</li>
+          <li key={link.path}>
+            <Link to={link.path}>{link.label}</Link>
+          </li>
         ))}
       </ul>
 
-      <button className="cart-btn">Cart ({cartCount})</button>
+      <Link to="/cart" className="cart-btn">
+        Cart ({cartCount})
+      </Link>
     </nav>
   );
 }

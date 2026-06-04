@@ -1,10 +1,11 @@
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import { categories } from "./data/categories";
-import CategoryCard from "./components/CategoryCard";
-import ProductCard from "./components/ProductCard";
-import { products } from "./data/products";
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ProductsPage from "./pages/ProductsPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -16,35 +17,19 @@ function App() {
   return (
     <main className="container">
       <Navbar cartCount={cartCount} />
-      <Hero cartCount={cartCount} />
-      <section>
-        <h2>Featured Categories</h2>
-        <div className="category-grid">
-          {categories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              name={category.name}
-              description={category.description}
-            />
-          ))}
-        </div>
-      </section>
 
-      <section>
-        <h2>Featured Products</h2>
-
-        <div className="category-grid">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              brand={product.brand}
-              price={product.price}
-              onAddToCart={handleAddToCart}
-            />
-          ))}
-        </div>
-      </section>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage cartCount={cartCount} onAddToCart={handleAddToCart} />
+          }
+        />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/cart" element={<CartPage />} />
+      </Routes>
     </main>
   );
 }
