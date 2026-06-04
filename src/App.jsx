@@ -25,7 +25,10 @@ function App() {
             <HomePage cartCount={cartCount} onAddToCart={handleAddToCart} />
           }
         />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route
+          path="/products"
+          element={<ProductsPage onAddToCart={handleAddToCart} />}
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
