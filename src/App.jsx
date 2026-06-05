@@ -8,21 +8,24 @@ import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
 
 function App() {
-  const [cartCount, setCartCount] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
 
-  function handleAddToCart() {
-    setCartCount((prevCount) => prevCount + 1);
+  function handleAddToCart(product) {
+    setCartItems((prevItems) => [...prevItems, product]);
   }
 
   return (
     <main className="container">
-      <Navbar cartCount={cartCount} />
+      <Navbar cartItems={cartItems.length} />
 
       <Routes>
         <Route
           path="/"
           element={
-            <HomePage cartCount={cartCount} onAddToCart={handleAddToCart} />
+            <HomePage
+              cartCount={cartItems.length}
+              onAddToCart={handleAddToCart}
+            />
           }
         />
         <Route
@@ -31,7 +34,7 @@ function App() {
         />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage cartItems={cartItems} />} />
       </Routes>
     </main>
   );

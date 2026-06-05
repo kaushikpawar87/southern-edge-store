@@ -10,9 +10,7 @@ function ProductsPage({ onAddToCart }) {
         {products.map((product) => (
           <ProductCard
             key={product.id}
-            name={product.name}
-            brand={product.brand}
-            price={product.price}
+            product={product}
             onAddToCart={onAddToCart}
           />
         ))}

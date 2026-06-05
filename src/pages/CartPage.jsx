@@ -1,12 +1,21 @@
-function CartPage({ cartCount }) {
+import ProductCard from "../components/ProductCard";
+
+function CartPage({ cartItems }) {
   return (
     <section>
       <h1>Your Cart</h1>
-
-      {cartCount === 0 ? (
+      {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <p>You have {cartCount} items in your cart</p>
+        <div>
+          {cartItems.map((item) => (
+            <div key={item.id}>
+              <h3>{item.name}</h3>
+              <h3>{item.brand}</h3>
+              <h3>{item.price}</h3>
+            </div>
+          ))}
+        </div>
       )}
     </section>
   );
