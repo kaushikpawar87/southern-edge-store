@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
-function Navbar({ cartItems }) {
+function Navbar({ cartCount }) {
   const links = [
     { label: "Products", path: "/products" },
     { label: "About", path: "/about" },
@@ -23,7 +23,7 @@ function Navbar({ cartItems }) {
       </ul>
 
       <Link to="/cart" className="cart-btn">
-        Cart ({cartItems})
+        Cart ({cartCount})
       </Link>
     </nav>
   );
