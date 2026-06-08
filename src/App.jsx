@@ -14,6 +14,12 @@ function App() {
     setCartItems((prevItems) => [...prevItems, product]);
   }
 
+  function handleRemoveFromCart(productId) {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId),
+    );
+  }
+
   return (
     <main className="container">
       <Navbar cartItems={cartItems.length} />
@@ -34,7 +40,15 @@ function App() {
         />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/cart" element={<CartPage cartItems={cartItems} />} />
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              cartItems={cartItems}
+              onRemoveFromCart={handleRemoveFromCart}
+            />
+          }
+        />
       </Routes>
     </main>
   );

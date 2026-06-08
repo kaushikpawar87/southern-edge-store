@@ -1,6 +1,6 @@
 import "../styles/cart-page.css";
 
-function CartPage({ cartItems }) {
+function CartPage({ cartItems, onRemoveFromCart }) {
   const subTotal = cartItems.reduce((total, item) => {
     return total + item.price;
   }, 0);
@@ -17,7 +17,7 @@ function CartPage({ cartItems }) {
               <h3>{item.name}</h3>
               <h3>{item.brand}</h3>
               <h3>${item.price}</h3>
-              <button>Remove</button>
+              <button onClick={() => onRemoveFromCart(item.id)}>Remove</button>
             </div>
           ))}
           <div>
