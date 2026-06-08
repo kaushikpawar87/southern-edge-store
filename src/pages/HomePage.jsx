@@ -10,7 +10,7 @@ function HomePage({ cartCount, onAddToCart }) {
     <>
       <Hero cartCount={cartCount} />
 
-      <section>
+      <section className="featured-categories">
         <h2>Featured Categories</h2>
 
         <div className="category-grid">
@@ -24,16 +24,14 @@ function HomePage({ cartCount, onAddToCart }) {
         </div>
       </section>
 
-      <section>
+      <section className="featured-products">
         <h2>Featured Products</h2>
 
         <div className="category-grid">
           {products.map((product) => (
             <ProductCard
               key={product.id}
-              name={product.name}
-              brand={product.brand}
-              price={product.price}
+              product={product}
               onAddToCart={onAddToCart}
             />
           ))}
