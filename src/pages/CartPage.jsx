@@ -1,6 +1,11 @@
 import "../styles/cart-page.css";
 
-function CartPage({ cartItems, onRemoveFromCart }) {
+function CartPage({
+  cartItems,
+  onRemoveFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+}) {
   const subTotal = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
@@ -26,7 +31,11 @@ function CartPage({ cartItems, onRemoveFromCart }) {
               <tr className="cart-item" key={item.id}>
                 <td>{item.name}</td>
                 <td>${item.price.toFixed(2)}</td>
-                <td>{item.quantity}</td>
+                <td className="quantity-display">
+                  <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                  {item.quantity}
+                  <button onClick={() => increaseQuantity(item.id)}>+</button>
+                </td>
                 <td>${(item.price * item.quantity).toFixed(2)}</td>
                 <td>
                   <button onClick={() => onRemoveFromCart(item.id)}>

@@ -11,6 +11,34 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  function increaseQuantity(productId) {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          : item,
+      ),
+    );
+  }
+
+  function decreaseQuantity(productId) {
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === productId
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  }
+
   function handleAddToCart(product) {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
@@ -62,6 +90,8 @@ function App() {
             <CartPage
               cartItems={cartItems}
               onRemoveFromCart={handleRemoveFromCart}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
             />
           }
         />

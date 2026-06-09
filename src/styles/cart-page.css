@@ -45,3 +45,10 @@
   text-align: right;
   margin-top: 24px;
 }
+
+.quantity-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
