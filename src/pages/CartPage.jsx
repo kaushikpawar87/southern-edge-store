@@ -25,18 +25,20 @@ function CartPage({ cartItems, onRemoveFromCart }) {
             {cartItems.map((item) => (
               <tr className="cart-item" key={item.id}>
                 <td>{item.name}</td>
-                <td>${item.price}</td>
+                <td>${item.price.toFixed(2)}</td>
                 <td>{item.quantity}</td>
-                <td>{item.price * item.quantity}</td>
-                <button onClick={() => onRemoveFromCart(item.id)}>
-                  Remove
-                </button>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
+                <td>
+                  <button onClick={() => onRemoveFromCart(item.id)}>
+                    Remove
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      <h2>Total: {subTotal}</h2>
+      <h2>Total: ${subTotal.toFixed(2)}</h2>
     </section>
   );
 }
