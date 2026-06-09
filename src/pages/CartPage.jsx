@@ -27,7 +27,7 @@ function CartPage({ cartItems, onRemoveFromCart }) {
                 <td>{item.name}</td>
                 <td>${item.price}</td>
                 <td>{item.quantity}</td>
-                <td>{subTotal}</td>
+                <td>{item.price * item.quantity}</td>
                 <button onClick={() => onRemoveFromCart(item.id)}>
                   Remove
                 </button>
@@ -36,6 +36,7 @@ function CartPage({ cartItems, onRemoveFromCart }) {
           </tbody>
         </table>
       )}
+      <h2>Total: {subTotal}</h2>
     </section>
   );
 }
