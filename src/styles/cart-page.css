@@ -4,6 +4,16 @@
   padding: 40px 20px;
 }
 
+.cart-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.order-summary {
+  width: 300px;
+}
+
 .cart-page table {
   width: 100%;
   border-collapse: collapse;
