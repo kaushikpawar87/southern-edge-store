@@ -13,9 +13,10 @@ function CartPage({
 
   return (
     <section className="cart-page">
-      <div className="cart-content">
-        <div className="cart-table">
-          <h1>Your Cart</h1>
+      {" "}
+      <h1>Your Cart</h1>
+      <div className="cart-layout">
+        <div className="cart-table-container">
           {cartItems.length === 0 ? (
             <p>Your cart is empty.</p>
           ) : (
@@ -32,7 +33,7 @@ function CartPage({
               <tbody>
                 {cartItems.map((item) => (
                   <tr className="cart-item" key={item.id}>
-                    <td>{item.name}</td>
+                    <td className="product-column">{item.name}</td>
                     <td>${item.price.toFixed(2)}</td>
                     <td className="quantity-display">
                       <button onClick={() => decreaseQuantity(item.id)}>

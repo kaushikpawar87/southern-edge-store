@@ -5,9 +5,14 @@ function OrderSummary({ subTotal }) {
   return (
     <div className="order-summary">
       <h2>Order Summary</h2>
-
-      <p>Subtotal: ${subTotal}</p>
-      <p>Shipping: ${shipping}</p>
+      <div>
+        {" "}
+        <p>Subtotal: ${subTotal}</p>
+      </div>
+      <div>
+        {" "}
+        <p>Shipping: ${shipping}</p>
+      </div>
 
       <hr />
 
