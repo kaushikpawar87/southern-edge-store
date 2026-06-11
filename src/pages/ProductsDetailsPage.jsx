@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
+import "../styles/product-details.css";
 
 function ProductsDetailsPage({ onAddToCart }) {
   const { id } = useParams();
 
   const product = products.find((product) => product.id === Number(id));
+
+  console.log(product.image);
 
   if (!product) {
     return (
@@ -15,12 +18,17 @@ function ProductsDetailsPage({ onAddToCart }) {
   }
 
   return (
-    <section>
-      <h1>{product.name}</h1>
-      <p>{product.brand}</p>
-      <p>{product.price}</p>
+    <section className="product-details">
+      <div className="product-image">
+        <img src={product.image} alt={product.name} />
+      </div>
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p>{product.brand}</p>
+        <p>${product.price}</p>
 
-      <button onClick={() => onAddToCart(product)}>Add to Cart</button>
+        <button onClick={() => onAddToCart(product)}>Add to Cart</button>
+      </div>
     </section>
   );
 }
