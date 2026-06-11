@@ -6,6 +6,7 @@ import ProductsPage from "./pages/ProductsPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
+import ProductsDetailsPage from "./pages/ProductsDetailsPage";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -94,6 +95,10 @@ function App() {
               decreaseQuantity={decreaseQuantity}
             />
           }
+        />
+        <Route
+          path="/products/:id"
+          element={<ProductsDetailsPage onAddToCart={handleAddToCart} />}
         />
       </Routes>
     </main>
