@@ -7,8 +7,6 @@ function ProductsDetailsPage({ onAddToCart }) {
 
   const product = products.find((product) => product.id === Number(id));
 
-  console.log(product.image);
-
   if (!product) {
     return (
       <section>
