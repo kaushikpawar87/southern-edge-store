@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function ProductCard({ product, onAddToCart }) {
   return (
     <div className="product-card">
-      <div>
-        <img src={product.image} alt={product.name} />
-      </div>
       <Link to={`/products/${product.id}`}>
+        <div>
+          <img src={product.image} alt={product.name} />
+        </div>
         <h3>{product.name}</h3>
       </Link>
       <p>{product.brand}</p>

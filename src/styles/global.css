@@ -29,12 +29,6 @@ section h2 {
   margin-bottom: 20px;
 }
 
-.cart-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -42,6 +36,6 @@ section h2 {
 }
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
