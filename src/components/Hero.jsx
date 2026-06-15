@@ -1,7 +1,7 @@
 import "../styles/hero.css";
 import { Link } from "react-router-dom";
 
-function Hero({ cartCount }) {
+function Hero() {
   return (
     <section className="hero">
       <h1>Southern Edge Cricket</h1>

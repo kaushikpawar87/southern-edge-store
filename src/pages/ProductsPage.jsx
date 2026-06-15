@@ -6,6 +6,8 @@ function ProductsPage({ onAddToCart }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("All");
 
+  const brands = ["All", ...new Set(products.map((product) => product.brand))];
+
   console.log(selectedBrand);
 
   const filteredProducts = products.filter((product) => {
@@ -27,13 +29,11 @@ function ProductsPage({ onAddToCart }) {
         value={selectedBrand}
         onChange={(event) => setSelectedBrand(event.target.value)}
       >
-        <option value="All">All Brands</option>
-        <option value="SS">SS</option>
-        <option value="SG">SG</option>
-        <option value="DSC">DSC</option>
-        <option value="GM">GM</option>
-        <option value="Gray Nicolls">Gray Nicolls</option>
-        <option value="Kookaburra">Kookaburra</option>
+        {brands.map((brand) => (
+          <option key={brand} value={brand}>
+            {brand === "All" ? "All brands" : brand}
+          </option>
+        ))}
       </select>
       <input
         type="text"
