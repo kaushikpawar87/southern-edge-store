@@ -3,6 +3,7 @@ import "../styles/navbar.css";
 
 function Navbar({ cartCount }) {
   const links = [
+    { label: "Home", path: "/" },
     { label: "Products", path: "/products" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },

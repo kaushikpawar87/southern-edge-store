@@ -27,7 +27,7 @@ function HomePage({ cartCount, onAddToCart }) {
       <section className="featured-products">
         <h2>Featured Products</h2>
 
-        <div className="category-grid">
+        <div className="products-grid">
           {products.map((product) => (
             <ProductCard
               key={product.id}

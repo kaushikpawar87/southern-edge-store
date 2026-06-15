@@ -42,7 +42,7 @@ function ProductsPage({ onAddToCart }) {
         onChange={(event) => setSearchTerm(event.target.value)}
       />
 
-      <div className="category-grid">
+      <div className="products-grid">
         {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
