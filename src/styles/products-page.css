@@ -1,0 +1,11 @@
+.no-results {
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.no-results h2 {
+  margin-bottom: 8px;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { products } from "../data/products";
+import "../styles/products-page.css";
 
 function ProductsPage({ onAddToCart }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -8,8 +9,6 @@ function ProductsPage({ onAddToCart }) {
   const [sortOption, setSortOption] = useState("featured");
 
   const brands = ["All", ...new Set(products.map((product) => product.brand))];
-
-  console.log(selectedBrand);
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
@@ -66,15 +65,26 @@ function ProductsPage({ onAddToCart }) {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      <div className="products-grid">
-        {sortedProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={onAddToCart}
-          />
-        ))}
-      </div>
+      {sortedProducts.length === 0 ? (
+        <div className="no-results">
+          <h2>No products found</h2>
+          <p>Try adjusting you search or filter.</p>
+        </div>
+      ) : (
+        <>
+          <p>Showing {sortedProducts.length} products.</p>
+
+          <div className="products-grid">
+            {sortedProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={onAddToCart}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }
