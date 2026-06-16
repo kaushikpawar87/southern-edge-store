@@ -5,6 +5,7 @@ import { products } from "../data/products";
 function ProductsPage({ onAddToCart }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("All");
+  const [sortOption, setSortOption] = useState("featured");
 
   const brands = ["All", ...new Set(products.map((product) => product.brand))];
 
@@ -21,6 +22,20 @@ function ProductsPage({ onAddToCart }) {
     return matchesSearch && matchesBrand;
   });
 
+  const sortedProducts = [...filteredProducts];
+
+  if (sortOption === "price-low") {
+    sortedProducts.sort((a, b) => a.price - b.price);
+  }
+
+  if (sortOption === "price-high") {
+    sortedProducts.sort((a, b) => b.price - a.price);
+  }
+
+  if (sortOption === "name") {
+    sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
   return (
     <section>
       <h1>All products</h1>
@@ -34,6 +49,16 @@ function ProductsPage({ onAddToCart }) {
             {brand === "All" ? "All brands" : brand}
           </option>
         ))}
+      </select>{" "}
+      <select
+        name="sort"
+        value={sortOption}
+        onChange={(event) => setSortOption(event.target.value)}
+      >
+        <option value="featured">Featured</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="name">Name: A to Z</option>
       </select>
       <input
         type="text"
@@ -41,9 +66,8 @@ function ProductsPage({ onAddToCart }) {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-
       <div className="products-grid">
-        {filteredProducts.map((product) => (
+        {sortedProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
