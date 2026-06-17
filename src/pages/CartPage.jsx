@@ -33,7 +33,7 @@ function CartPage({
               <tbody>
                 {cartItems.map((item) => (
                   <tr className="cart-item" key={item.id}>
-                    <td className="product-column">{item.name}</td>
+                    <td>{item.name}</td>
                     <td>${item.price.toFixed(2)}</td>
                     <td className="quantity-display">
                       <button onClick={() => decreaseQuantity(item.id)}>
