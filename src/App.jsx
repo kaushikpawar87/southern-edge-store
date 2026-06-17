@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
@@ -9,7 +9,18 @@ import CartPage from "./pages/CartPage";
 import ProductsDetailsPage from "./pages/ProductsDetailsPage";
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    if (savedCart) {
+      return JSON.parse(savedCart);
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   function increaseQuantity(productId) {
