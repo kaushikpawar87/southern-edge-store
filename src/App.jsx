@@ -7,6 +7,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
 import ProductsDetailsPage from "./pages/ProductsDetailsPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
   const [cartItems, setCartItems] = useState(() => {
@@ -111,6 +112,7 @@ function App() {
           path="/products/:id"
           element={<ProductsDetailsPage onAddToCart={handleAddToCart} />}
         />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </main>
   );
