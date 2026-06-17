@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 
 function CheckoutPage() {
   const [formData, setFormData] = useState({
@@ -10,18 +10,47 @@ function CheckoutPage() {
     postcode: "",
   });
 
+  const [error, setError] = useState("");
+
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    setError("");
+
+    if (!formData.fullName.trim()) {
+      setError("Please enter your Full Name");
+      return;
+    }
+    if (!formData.email.trim()) {
+      setError("Please enter your Email");
+      return;
+    }
+    if (!formData.phone.trim()) {
+      setError("Please enter your Phone Number");
+      return;
+    }
+    if (!formData.address.trim()) {
+      setError("Please enter your Address");
+      return;
+    }
+    if (!formData.city.trim()) {
+      setError("Please enter your City");
+      return;
+    }
+    if (!formData.postcode.trim()) {
+      setError("Please enter your Postcode");
+      return;
+    }
     console.log("Order submitted:", formData);
   }
 
   return (
     <section>
       <h2>Checkout Page</h2>
+      {error && <p>{error}</p>}
       <form action="" onSubmit={handleSubmit}>
         <input
           name="fullName"
@@ -68,7 +97,6 @@ function CheckoutPage() {
 
         <button type="submit">Place Order</button>
       </form>
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
     </section>
   );
 }
