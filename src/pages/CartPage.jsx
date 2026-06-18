@@ -1,3 +1,4 @@
+import Button from "../components/Button";
 import OrderSummary from "../components/OrderSummary";
 import "../styles/cart-page.css";
 
@@ -36,19 +37,19 @@ function CartPage({
                     <td>{item.name}</td>
                     <td>${item.price.toFixed(2)}</td>
                     <td className="quantity-display">
-                      <button onClick={() => decreaseQuantity(item.id)}>
+                      <Button onClick={() => decreaseQuantity(item.id)}>
                         -
-                      </button>
+                      </Button>
                       {item.quantity}
-                      <button onClick={() => increaseQuantity(item.id)}>
+                      <Button onClick={() => increaseQuantity(item.id)}>
                         +
-                      </button>
+                      </Button>
                     </td>
                     <td>${(item.price * item.quantity).toFixed(2)}</td>
                     <td>
-                      <button onClick={() => onRemoveFromCart(item.id)}>
+                      <Button onClick={() => onRemoveFromCart(item.id)}>
                         Remove
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 ))}

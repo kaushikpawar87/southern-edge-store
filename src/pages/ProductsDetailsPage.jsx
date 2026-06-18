@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 import "../styles/product-details.css";
+import Button from "../components/Button";
 
 function ProductsDetailsPage({ onAddToCart }) {
   const { id } = useParams();
@@ -25,7 +26,7 @@ function ProductsDetailsPage({ onAddToCart }) {
         <p>{product.brand}</p>
         <p>${product.price}</p>
 
-        <button onClick={() => onAddToCart(product)}>Add to Cart</button>
+        <Button onClick={() => onAddToCart(product)}>Add to Cart</Button>
       </div>
     </section>
   );

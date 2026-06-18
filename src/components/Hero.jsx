@@ -1,5 +1,6 @@
 import "../styles/hero.css";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 function Hero() {
   return (
@@ -9,11 +10,11 @@ function Hero() {
         Premium cricket equipment for players who demand performance and
         precision.
       </p>
-      <div className="hero-buttons">
+      <div className="hero-Buttons">
         <Link to="/products" className="">
-          <button className="primary-btn">Shop Now</button>
+          <Button className="primary-btn">Shop Now</Button>
         </Link>
-        <button className="secondary-btn">Learn More</button>
+        <Button className="secondary-btn">Learn More</Button>
       </div>
     </section>
   );
