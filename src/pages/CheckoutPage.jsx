@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FormInput from "../components/FormInput";
 
 function CheckoutPage({ cartItems, setCartItems }) {
   const orderTotal = cartItems.reduce(
@@ -21,6 +22,7 @@ function CheckoutPage({ cartItems, setCartItems }) {
   });
 
   const [error, setError] = useState("");
+
   const [orderSubmitted, setOrderSubmitted] = useState(false);
 
   const [confirmedOrder, setConfirmedOrder] = useState(null);
@@ -100,42 +102,42 @@ function CheckoutPage({ cartItems, setCartItems }) {
           <p>Total Products: {cartItems.length}</p>
           <p>Order Total: ${orderTotal}</p>
           <form action="" onSubmit={handleSubmit}>
-            <input
+            <FormInput
               name="fullName"
               type="text"
               placeholder="Full Name"
               value={formData.fullName}
               onChange={handleInputChange}
             />
-            <input
+            <FormInput
               name="email"
               type="text"
               placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
             />
-            <input
+            <FormInput
               name="phone"
               type="text"
               placeholder="Phone"
               value={formData.phone}
               onChange={handleInputChange}
             />
-            <input
+            <FormInput
               name="address"
               type="text"
               placeholder="Street Address"
               value={formData.address}
               onChange={handleInputChange}
             />
-            <input
+            <FormInput
               name="city"
               type="text"
               placeholder="City"
               value={formData.city}
               onChange={handleInputChange}
             />
-            <input
+            <FormInput
               name="postcode"
               type="text"
               placeholder="Post Code"
