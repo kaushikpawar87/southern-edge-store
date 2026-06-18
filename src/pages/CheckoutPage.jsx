@@ -1,6 +1,16 @@
 import { useState } from "react";
 
-function CheckoutPage() {
+function CheckoutPage({ cartItems, setCartItems }) {
+  const orderTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -47,6 +57,7 @@ function CheckoutPage() {
     }
     setOrderSubmitted(true);
     console.log("Order submitted:", formData);
+    setCartItems([]);
   }
 
   return (
@@ -63,52 +74,58 @@ function CheckoutPage() {
       )}
 
       {!orderSubmitted && (
-        <form action="" onSubmit={handleSubmit}>
-          <input
-            name="fullName"
-            type="text"
-            placeholder="Full Name"
-            value={formData.fullName}
-            onChange={handleInputChange}
-          />
-          <input
-            name="email"
-            type="text"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-          <input
-            name="phone"
-            type="text"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
-          <input
-            name="address"
-            type="text"
-            placeholder="Street Address"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-          <input
-            name="city"
-            type="text"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleInputChange}
-          />
-          <input
-            name="postcode"
-            type="text"
-            placeholder="Post Code"
-            value={formData.postcode}
-            onChange={handleInputChange}
-          />
+        <div>
+          <h3>Order Summary</h3>
+          <p>Total Items: {totalQuantity}</p>
+          <p>Total Products: {cartItems.length}</p>
+          <p>Order Total: ${orderTotal}</p>
+          <form action="" onSubmit={handleSubmit}>
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleInputChange}
+            />
+            <input
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+            <input
+              name="phone"
+              type="text"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+            <input
+              name="address"
+              type="text"
+              placeholder="Street Address"
+              value={formData.address}
+              onChange={handleInputChange}
+            />
+            <input
+              name="city"
+              type="text"
+              placeholder="City"
+              value={formData.city}
+              onChange={handleInputChange}
+            />
+            <input
+              name="postcode"
+              type="text"
+              placeholder="Post Code"
+              value={formData.postcode}
+              onChange={handleInputChange}
+            />
 
-          <button type="submit">Place Order</button>
-        </form>
+            <button type="submit">Place Order</button>
+          </form>
+        </div>
       )}
     </section>
   );

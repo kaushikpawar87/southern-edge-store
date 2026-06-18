@@ -112,7 +112,12 @@ function App() {
           path="/products/:id"
           element={<ProductsDetailsPage onAddToCart={handleAddToCart} />}
         />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <CheckoutPage cartItems={cartItems} setCartItems={setCartItems} />
+          }
+        />
       </Routes>
     </main>
   );
