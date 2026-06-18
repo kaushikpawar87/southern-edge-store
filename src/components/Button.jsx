@@ -1,8 +1,8 @@
-function Button(type = "button", children, onClick) {
+function Button({ type = "button", children, onClick }) {
   return (
-    <Button type={type} onClick={onClick}>
+    <button type={type} onClick={onClick}>
       {children}
-    </Button>
+    </button>
   );
 }
 
