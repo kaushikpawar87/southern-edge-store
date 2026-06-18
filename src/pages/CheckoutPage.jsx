@@ -23,6 +23,9 @@ function CheckoutPage({ cartItems, setCartItems }) {
   const [error, setError] = useState("");
   const [orderSubmitted, setOrderSubmitted] = useState(false);
 
+  const [confirmedOrder, setConfirmedOrder] = useState(null);
+  console.log("Order Details:", { confirmedOrder });
+
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
@@ -55,6 +58,14 @@ function CheckoutPage({ cartItems, setCartItems }) {
       setError("Please enter your Postcode");
       return;
     }
+
+    setConfirmedOrder({
+      items: cartItems,
+      total: orderTotal,
+      quantity: totalQuantity,
+      customer: formData,
+    });
+
     setOrderSubmitted(true);
     console.log("Order submitted:", formData);
     setCartItems([]);
@@ -70,6 +81,15 @@ function CheckoutPage({ cartItems, setCartItems }) {
           <h3>Order placed successfully!</h3>
 
           <p>Thank you for your order. We will contact you shortly.</p>
+
+          <ul>
+            {confirmedOrder.items.map((item) => (
+              <li>
+                {item.name} {item.quantity} {item.price}
+              </li>
+            ))}
+            <li>Total Quantity: {confirmedOrder.quantity}</li>
+          </ul>
         </div>
       )}
 
