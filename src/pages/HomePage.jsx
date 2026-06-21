@@ -4,8 +4,13 @@ import ProductCard from "../components/ProductCard";
 
 import { categories } from "../data/categories";
 import { products } from "../data/products";
+import { useCart } from "../context/CartContext";
 
-function HomePage({ cartCount, onAddToCart }) {
+function HomePage() {
+  const { cartItems, handleAddToCart } = useCart();
+
+  const cartCount = cartItems.length;
+
   return (
     <>
       <Hero cartCount={cartCount} />
@@ -32,7 +37,7 @@ function HomePage({ cartCount, onAddToCart }) {
             <ProductCard
               key={product.id}
               product={product}
-              onAddToCart={onAddToCart}
+              onAddToCart={handleAddToCart}
             />
           ))}
         </div>

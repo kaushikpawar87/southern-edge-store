@@ -1,7 +1,11 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
+import Button from "../components/Button";
+import { useCart } from "../context/CartContext";
 
-function CheckoutPage({ cartItems, setCartItems }) {
+function CheckoutPage() {
+  const { cartItems, setCartItems } = useCart();
+
   const orderTotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
@@ -111,14 +115,14 @@ function CheckoutPage({ cartItems, setCartItems }) {
             />
             <FormInput
               name="email"
-              type="text"
+              type="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
             />
             <FormInput
               name="phone"
-              type="text"
+              type="phone"
               placeholder="Phone"
               value={formData.phone}
               onChange={handleInputChange}
@@ -145,7 +149,7 @@ function CheckoutPage({ cartItems, setCartItems }) {
               onChange={handleInputChange}
             />
 
-            <button type="submit">Place Order</button>
+            <Button type="submit">Place Order</Button>
           </form>
         </div>
       )}

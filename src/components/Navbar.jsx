@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
+import { useCart } from "../context/CartContext";
 
-function Navbar({ cartCount }) {
+function Navbar() {
+  const { cartItems } = useCart();
+
+  console.log(useCart());
+
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const links = [
     { label: "Home", path: "/" },
     { label: "Products", path: "/products" },

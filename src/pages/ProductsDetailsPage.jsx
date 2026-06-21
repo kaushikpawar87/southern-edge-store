@@ -2,8 +2,11 @@ import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 import "../styles/product-details.css";
 import Button from "../components/Button";
+import { useCart } from "../context/CartContext";
 
-function ProductsDetailsPage({ onAddToCart }) {
+function ProductsDetailsPage() {
+  const { handleAddToCart } = useCart();
+
   const { id } = useParams();
 
   const product = products.find((product) => product.id === Number(id));
@@ -26,7 +29,7 @@ function ProductsDetailsPage({ onAddToCart }) {
         <p>{product.brand}</p>
         <p>${product.price}</p>
 
-        <Button onClick={() => onAddToCart(product)}>Add to Cart</Button>
+        <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
       </div>
     </section>
   );

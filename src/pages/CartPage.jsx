@@ -1,13 +1,16 @@
 import Button from "../components/Button";
 import OrderSummary from "../components/OrderSummary";
+import { useCart } from "../context/CartContext";
 import "../styles/cart-page.css";
 
-function CartPage({
-  cartItems,
-  onRemoveFromCart,
-  increaseQuantity,
-  decreaseQuantity,
-}) {
+function CartPage() {
+  const {
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    handleRemoveFromCart,
+  } = useCart();
+
   const subTotal = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
@@ -47,7 +50,7 @@ function CartPage({
                     </td>
                     <td>${(item.price * item.quantity).toFixed(2)}</td>
                     <td>
-                      <Button onClick={() => onRemoveFromCart(item.id)}>
+                      <Button onClick={() => handleRemoveFromCart(item.id)}>
                         Remove
                       </Button>
                     </td>
