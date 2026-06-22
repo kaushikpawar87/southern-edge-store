@@ -16,6 +16,15 @@ export function CartProvider({ children }) {
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  const subTotal = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
+  const orderTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+
   function increaseQuantity(productId) {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -44,7 +53,7 @@ export function CartProvider({ children }) {
     );
   }
 
-  function handleAddToCart(product) {
+  function addToCart(product) {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
 
@@ -63,7 +72,7 @@ export function CartProvider({ children }) {
     });
   }
 
-  function handleRemoveFromCart(productId) {
+  function removeFromCart(productId) {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId),
     );
@@ -74,11 +83,13 @@ export function CartProvider({ children }) {
       value={{
         cartItems,
         setCartItems,
-        handleAddToCart,
-        handleRemoveFromCart,
+        addToCart,
+        removeFromCart,
         increaseQuantity,
         decreaseQuantity,
         cartCount,
+        subTotal,
+        orderTotal,
       }}
     >
       {children}

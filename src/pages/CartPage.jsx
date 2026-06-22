@@ -4,12 +4,8 @@ import { useCart } from "../context/hooks/useCart.js";
 import "../styles/cart-page.css";
 
 function CartPage() {
-  const {
-    cartItems,
-    increaseQuantity,
-    decreaseQuantity,
-    handleRemoveFromCart,
-  } = useCart();
+  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } =
+    useCart();
 
   const subTotal = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
@@ -50,7 +46,7 @@ function CartPage() {
                     </td>
                     <td>${(item.price * item.quantity).toFixed(2)}</td>
                     <td>
-                      <Button onClick={() => handleRemoveFromCart(item.id)}>
+                      <Button onClick={() => removeFromCart(item.id)}>
                         Remove
                       </Button>
                     </td>

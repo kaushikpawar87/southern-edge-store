@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { useCart } from "../context/hooks/useCart.js";
 
 function ProductsDetailsPage() {
-  const { handleAddToCart } = useCart();
+  const { addToCart } = useCart();
 
   const { id } = useParams();
 
@@ -29,7 +29,7 @@ function ProductsDetailsPage() {
         <p>{product.brand}</p>
         <p>${product.price}</p>
 
-        <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+        <Button onClick={() => addToCart(product)}>Add to Cart</Button>
       </div>
     </section>
   );

@@ -7,9 +7,7 @@ import { products } from "../data/products";
 import { useCart } from "../context/hooks/useCart.js";
 
 function HomePage() {
-  const { cartItems, handleAddToCart } = useCart();
-
-  const cartCount = cartItems.length;
+  const { cartCount, addToCart } = useCart();
 
   return (
     <>
@@ -37,7 +35,7 @@ function HomePage() {
             <ProductCard
               key={product.id}
               product={product}
-              onAddToCart={handleAddToCart}
+              onAddToCart={addToCart}
             />
           ))}
         </div>

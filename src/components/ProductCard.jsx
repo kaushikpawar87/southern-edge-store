@@ -1,8 +1,11 @@
 import "../styles/product-card.css";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import { useCart } from "../context/hooks/useCart";
 
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product }) {
+  const { addToCart } = useCart();
+
   return (
     <div className="product-card">
       <Link to={`/products/${product.id}`}>
@@ -14,7 +17,7 @@ function ProductCard({ product, onAddToCart }) {
       <p>{product.brand}</p>
       <h4>${product.price}</h4>
 
-      <Button onClick={() => onAddToCart(product)}>Add To Cart</Button>
+      <Button onClick={() => addToCart(product)}>Add To Cart</Button>
     </div>
   );
 }

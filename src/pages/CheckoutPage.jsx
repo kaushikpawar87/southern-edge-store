@@ -90,7 +90,7 @@ function CheckoutPage() {
 
           <ul>
             {confirmedOrder.items.map((item) => (
-              <li>
+              <li key={item.id}>
                 {item.name} {item.quantity} {item.price}
               </li>
             ))}
@@ -105,7 +105,7 @@ function CheckoutPage() {
           <p>Total Items: {totalQuantity}</p>
           <p>Total Products: {cartItems.length}</p>
           <p>Order Total: ${orderTotal}</p>
-          <form action="" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <FormInput
               name="fullName"
               type="text"

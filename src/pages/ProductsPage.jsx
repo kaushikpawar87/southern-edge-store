@@ -2,11 +2,8 @@ import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { products } from "../data/products";
 import "../styles/products-page.css";
-import { useCart } from "../context/hooks/useCart.js";
 
 function ProductsPage() {
-  const { handleAddToCart } = useCart();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
@@ -79,11 +76,7 @@ function ProductsPage() {
 
           <div className="products-grid">
             {sortedProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={handleAddToCart}
-              />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </>

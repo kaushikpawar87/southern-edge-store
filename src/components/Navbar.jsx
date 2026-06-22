@@ -3,11 +3,10 @@ import "../styles/navbar.css";
 import { useCart } from "../context/hooks/useCart.js";
 
 function Navbar() {
-  const { cartItems } = useCart();
+  const { cartCount } = useCart();
 
   console.log(useCart());
 
-  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const links = [
     { label: "Home", path: "/" },
     { label: "Products", path: "/products" },
