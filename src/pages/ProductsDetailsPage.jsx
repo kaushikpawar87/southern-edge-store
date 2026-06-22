@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 import "../styles/product-details.css";
 import Button from "../components/Button";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/hooks/useCart.js";
 
 function ProductsDetailsPage() {
   const { handleAddToCart } = useCart();

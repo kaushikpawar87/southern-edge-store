@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { products } from "../data/products";
 import "../styles/products-page.css";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/hooks/useCart.js";
 
 function ProductsPage() {
   const { handleAddToCart } = useCart();

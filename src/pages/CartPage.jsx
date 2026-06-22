@@ -1,6 +1,6 @@
 import Button from "../components/Button";
 import OrderSummary from "../components/OrderSummary";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/hooks/useCart.js";
 import "../styles/cart-page.css";
 
 function CartPage() {

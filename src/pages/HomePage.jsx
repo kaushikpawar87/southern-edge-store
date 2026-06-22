@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 
 import { categories } from "../data/categories";
 import { products } from "../data/products";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/hooks/useCart.js";
 
 function HomePage() {
   const { cartItems, handleAddToCart } = useCart();

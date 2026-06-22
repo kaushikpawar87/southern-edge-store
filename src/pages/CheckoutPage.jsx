@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/hooks/useCart.js";
 
 function CheckoutPage() {
   const { cartItems, setCartItems } = useCart();
