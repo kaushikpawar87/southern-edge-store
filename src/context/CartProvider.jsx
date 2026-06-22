@@ -25,6 +25,11 @@ export function CartProvider({ children }) {
     0,
   );
 
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   function increaseQuantity(productId) {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -90,6 +95,7 @@ export function CartProvider({ children }) {
         cartCount,
         subTotal,
         orderTotal,
+        totalQuantity,
       }}
     >
       {children}

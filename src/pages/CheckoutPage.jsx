@@ -4,12 +4,7 @@ import Button from "../components/Button";
 import { useCart } from "../context/hooks/useCart.js";
 
 function CheckoutPage() {
-  const { cartItems, setCartItems, orderTotal } = useCart();
-
-  const totalQuantity = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0,
-  );
+  const { cartItems, setCartItems, orderTotal, totalQuantity } = useCart();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -25,7 +20,6 @@ function CheckoutPage() {
   const [orderSubmitted, setOrderSubmitted] = useState(false);
 
   const [confirmedOrder, setConfirmedOrder] = useState(null);
-  console.log("Order Details:", { confirmedOrder });
 
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -68,7 +62,6 @@ function CheckoutPage() {
     });
 
     setOrderSubmitted(true);
-    console.log("Order submitted:", formData);
     setCartItems([]);
   }
 

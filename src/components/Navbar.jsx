@@ -5,8 +5,6 @@ import { useCart } from "../context/hooks/useCart.js";
 function Navbar() {
   const { cartCount } = useCart();
 
-  console.log(useCart());
-
   const links = [
     { label: "Home", path: "/" },
     { label: "Products", path: "/products" },
