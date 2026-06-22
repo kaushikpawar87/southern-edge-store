@@ -4,12 +4,7 @@ import Button from "../components/Button";
 import { useCart } from "../context/hooks/useCart.js";
 
 function CheckoutPage() {
-  const { cartItems, setCartItems } = useCart();
-
-  const orderTotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
+  const { cartItems, setCartItems, orderTotal } = useCart();
 
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -84,18 +79,31 @@ function CheckoutPage() {
 
       {orderSubmitted && (
         <div>
-          <h3>Order placed successfully!</h3>
+          <h2>Order Placed Successfully!</h2>
 
           <p>Thank you for your order. We will contact you shortly.</p>
+
+          <h3>Customer Details</h3>
+
+          <p>Name: {confirmedOrder.customer.fullName}</p>
+
+          <p>Email: {confirmedOrder.customer.email}</p>
+
+          <p>Phone: {confirmedOrder.customer.phone}</p>
+
+          <h3>Order Items</h3>
 
           <ul>
             {confirmedOrder.items.map((item) => (
               <li key={item.id}>
-                {item.name} {item.quantity} {item.price}
+                {item.name} x {item.quantity} - ${item.price}
               </li>
             ))}
-            <li>Total Quantity: {confirmedOrder.quantity}</li>
           </ul>
+
+          <p>Total Quantity: {confirmedOrder.quantity}</p>
+
+          <p>Order Total: ${confirmedOrder.total}</p>
         </div>
       )}
 
