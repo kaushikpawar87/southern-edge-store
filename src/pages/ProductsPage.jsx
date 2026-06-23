@@ -8,11 +8,19 @@ function ProductsPage() {
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
 
+  // Mock Api calling
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
+      const shouldFail = true;
+
+      if (shouldFail) {
+        setError("Failed to load products");
+        setLoading(false);
+      }
       setProducts(mockProducts);
       setLoading(false);
     }, 2000);
@@ -22,6 +30,10 @@ function ProductsPage() {
 
   if (loading) {
     return <h2>Loading Products</h2>;
+  }
+
+  if (error) {
+    return <h2>Failed to Load Products</h2>;
   }
 
   const filteredProducts = products.filter((product) => {
