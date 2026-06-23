@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-import { products } from "../data/products";
+import { products as mockProducts } from "../data/products";
 import "../styles/products-page.css";
 
 function ProductsPage() {
@@ -8,7 +8,21 @@ function ProductsPage() {
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
 
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setProducts(mockProducts);
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   const brands = ["All", ...new Set(products.map((product) => product.brand))];
+
+  if (loading) {
+    return <h2>Loading Products</h2>;
+  }
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
