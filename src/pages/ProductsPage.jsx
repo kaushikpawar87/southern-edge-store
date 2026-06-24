@@ -9,10 +9,40 @@ function ProductsPage() {
   const [sortOption, setSortOption] = useState("featured");
   const { products, loading, error } = useProducts();
 
-  console.log("claculating brands");
   const brands = useMemo(() => {
+    console.log("claculating brands");
     return ["All", ...new Set(products.map((product) => product.brand))];
   }, [products]);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.brand.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesBrand =
+        selectedBrand === "All" || product.brand === selectedBrand;
+
+      return matchesSearch && matchesBrand;
+    });
+  }, [products, searchTerm, selectedBrand]);
+
+  const sortedProducts = useMemo(() => {
+    const sorted = [...filteredProducts];
+
+    if (sortOption === "price-low") {
+      sortedProducts.sort((a, b) => a.price - b.price);
+    }
+
+    if (sortOption === "price-high") {
+      sortedProducts.sort((a, b) => b.price - a.price);
+    }
+
+    if (sortOption === "name") {
+      sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    return sorted;
+  }, [filteredProducts, sortOption]);
 
   if (loading) {
     return <h2>Loading Products</h2>;
@@ -21,32 +51,6 @@ function ProductsPage() {
   if (error) {
     return <h2>Failed to Load Products</h2>;
   }
-
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.brand.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesBrand =
-      selectedBrand === "All" || product.brand === selectedBrand;
-
-    return matchesSearch && matchesBrand;
-  });
-
-  const sortedProducts = [...filteredProducts];
-
-  if (sortOption === "price-low") {
-    sortedProducts.sort((a, b) => a.price - b.price);
-  }
-
-  if (sortOption === "price-high") {
-    sortedProducts.sort((a, b) => b.price - a.price);
-  }
-
-  if (sortOption === "name") {
-    sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
   return (
     <section>
       <h1>All products</h1>
