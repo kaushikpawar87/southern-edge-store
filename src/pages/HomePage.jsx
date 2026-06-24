@@ -29,10 +29,10 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="featured-products">
+      <section className="">
         <h2>Featured Products</h2>
 
-        <div className="products-grid">
+        <div className="featured-products-grid">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}

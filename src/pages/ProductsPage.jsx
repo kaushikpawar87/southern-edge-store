@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import "../styles/products-page.css";
 import { useProducts } from "../context/hooks/useProducts";
@@ -9,7 +9,10 @@ function ProductsPage() {
   const [sortOption, setSortOption] = useState("featured");
   const { products, loading, error } = useProducts();
 
-  const brands = ["All", ...new Set(products.map((product) => product.brand))];
+  console.log("claculating brands");
+  const brands = useMemo(() => {
+    return ["All", ...new Set(products.map((product) => product.brand))];
+  }, [products]);
 
   if (loading) {
     return <h2>Loading Products</h2>;
