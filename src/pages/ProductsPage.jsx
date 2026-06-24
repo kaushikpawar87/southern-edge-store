@@ -1,48 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProductCard from "../components/ProductCard";
-// import { products as mockProducts } from "../data/products";
 import "../styles/products-page.css";
+import { useProducts } from "../context/hooks/useProducts";
 
 function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
+  const { products, loading, error } = useProducts();
 
-  // Mock Api calling
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        setLoading(true);
-
-        const response = await fetch("https://fakestoreapi.com/products");
-        const data = await response.json();
-
-        const transformedProducts = data.map((product) => ({
-          id: product.id,
-          name: product.title,
-          brand: product.category,
-          price: product.price,
-          image: product.image,
-        }));
-
-        console.log(response);
-        console.log(data);
-        setProducts(transformedProducts);
-      } catch (error) {
-        console.log(error);
-        setError("Products failed to load");
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
-  }, []);
-
-  console.log(products);
   const brands = ["All", ...new Set(products.map((product) => product.brand))];
 
   if (loading) {

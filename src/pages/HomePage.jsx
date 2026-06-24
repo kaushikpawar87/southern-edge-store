@@ -3,11 +3,13 @@ import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
 
 import { categories } from "../data/categories";
-import { products } from "../data/products";
 import { useCart } from "../context/hooks/useCart.js";
+import { useProducts } from "../context/hooks/useProducts.js";
 
 function HomePage() {
   const { cartCount, addToCart } = useCart();
+  const { products } = useProducts();
+  const featuredProducts = products.slice(0, 4);
 
   return (
     <>
@@ -31,7 +33,7 @@ function HomePage() {
         <h2>Featured Products</h2>
 
         <div className="products-grid">
-          {products.map((product) => (
+          {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
