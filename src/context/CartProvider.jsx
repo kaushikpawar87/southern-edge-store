@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CartContext } from "./CartContext.js";
 
 export function CartProvider({ children }) {
@@ -58,7 +58,7 @@ export function CartProvider({ children }) {
     );
   }
 
-  function addToCart(product) {
+  const handleAddToCart = useCallback((product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
 
@@ -75,7 +75,7 @@ export function CartProvider({ children }) {
 
       return [...prevItems, { ...product, quantity: 1 }];
     });
-  }
+  }, []);
 
   function removeFromCart(productId) {
     setCartItems((prevItems) =>
@@ -88,7 +88,7 @@ export function CartProvider({ children }) {
       value={{
         cartItems,
         setCartItems,
-        addToCart,
+        handleAddToCart,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,

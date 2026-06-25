@@ -4,7 +4,7 @@ import Button from "./Button";
 import { useCart } from "../context/hooks/useCart";
 
 function ProductCard({ product }) {
-  const { addToCart } = useCart();
+  const { handleAddToCart } = useCart();
 
   return (
     <div className="product-card">
@@ -17,7 +17,7 @@ function ProductCard({ product }) {
       <p>{product.brand}</p>
       <h4>${product.price}</h4>
 
-      <Button onClick={() => addToCart(product)}>Add To Cart</Button>
+      <Button onClick={() => handleAddToCart(product)}>Add To Cart</Button>
     </div>
   );
 }
