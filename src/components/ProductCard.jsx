@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/product-card.css";
 import { Link } from "react-router-dom";
 import Button from "./Button";
@@ -23,4 +24,4 @@ function ProductCard({ product }) {
   );
 }
 
-export default ProductCard;
+export default React.memo(ProductCard);
