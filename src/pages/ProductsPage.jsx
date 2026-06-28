@@ -30,17 +30,20 @@ function ProductsPage() {
   const sortedProducts = useMemo(() => {
     const sorted = [...filteredProducts];
 
-    if (sortOption === "price-low") {
-      sortedProducts.sort((a, b) => a.price - b.price);
+    switch (sortOption) {
+      case "price-low":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+
+      case "price-high":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+
+      case "name":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
     }
 
-    if (sortOption === "price-high") {
-      sortedProducts.sort((a, b) => b.price - a.price);
-    }
-
-    if (sortOption === "name") {
-      sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-    }
     return sorted;
   }, [filteredProducts, sortOption]);
 
