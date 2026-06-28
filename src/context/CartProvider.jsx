@@ -30,7 +30,7 @@ export function CartProvider({ children }) {
     0,
   );
 
-  function increaseQuantity(productId) {
+  const increaseQuantity = useCallback((productId) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
         item.id === productId
@@ -41,9 +41,9 @@ export function CartProvider({ children }) {
           : item,
       ),
     );
-  }
+  }, []);
 
-  function decreaseQuantity(productId) {
+  const decreaseQuantity = useCallback((productId) => {
     setCartItems((prevItems) =>
       prevItems
         .map((item) =>
@@ -56,7 +56,7 @@ export function CartProvider({ children }) {
         )
         .filter((item) => item.quantity > 0),
     );
-  }
+  }, []);
 
   const handleAddToCart = useCallback((product) => {
     setCartItems((prevItems) => {
@@ -77,11 +77,11 @@ export function CartProvider({ children }) {
     });
   }, []);
 
-  function removeFromCart(productId) {
+  const removeFromCart = useCallback((productId) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId),
     );
-  }
+  }, []);
 
   return (
     <CartContext.Provider

@@ -5,6 +5,7 @@ import { useCart } from "../context/hooks/useCart";
 
 function ProductCard({ product }) {
   const { handleAddToCart } = useCart();
+  console.log("Card re-rendered: ", product.name);
 
   return (
     <div className="product-card">
