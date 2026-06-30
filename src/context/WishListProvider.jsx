@@ -1,19 +1,31 @@
 import { useState } from "react";
 import { WishlistContext } from "./WishlistContext";
-import { useProducts } from "./hooks/useProducts";
 
 export function WishlistProvider({ children }) {
-  const { products } = useProducts();
-  const [wishlistItems, setWishlistItmes] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState(() => {
+    const savedWishlist = localStorage.getItem("wishlistItems");
+    if (savedWishlist) {
+      return JSON.parse(savedWishlist);
+    }
+    return [];
+  });
 
-  function addToWishlist({ products }) {
-    setWishlistItmes((previousItems) => {
-      [...previousItems, products.id];
+  function toggleWishlist(product) {
+    setWishlistItems((prevItems) => {
+      const exists = prevItems.find((item) => item.id === product.id);
+      if (exists) {
+        return prevItems.filter((item) => item.id !== product.id);
+      }
+      return [...prevItems, product];
     });
   }
 
+  const wishListCount = wishlistItems.length;
+
   return (
-    <WishlistContext.Provider value={{ wishlistItems, addToWishlist }}>
+    <WishlistContext.Provider
+      value={{ wishlistItems, toggleWishlist, wishListCount }}
+    >
       {children}
     </WishlistContext.Provider>
   );
