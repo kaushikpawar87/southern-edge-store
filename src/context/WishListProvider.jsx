@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WishlistContext } from "./WishlistContext";
 
 export function WishlistProvider({ children }) {
@@ -9,6 +9,14 @@ export function WishlistProvider({ children }) {
     }
     return [];
   });
+
+  function isInWishlist(productId) {
+    return wishlistItems.some((item) => item.id === productId);
+  }
+
+  useEffect(() => {
+    localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
 
   function toggleWishlist(product) {
     setWishlistItems((prevItems) => {
@@ -24,7 +32,7 @@ export function WishlistProvider({ children }) {
 
   return (
     <WishlistContext.Provider
-      value={{ wishlistItems, toggleWishlist, wishListCount }}
+      value={{ wishlistItems, toggleWishlist, wishListCount, isInWishlist }}
     >
       {children}
     </WishlistContext.Provider>

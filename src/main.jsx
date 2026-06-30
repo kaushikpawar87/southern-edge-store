@@ -6,14 +6,17 @@ import App from "./App.jsx";
 import "./styles/global.css";
 import { CartProvider } from "./context/CartProvider.jsx";
 import ProductProvider from "./context/ProductsProvider.jsx";
+import { WishlistProvider } from "./context/WishListProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <ProductProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </ProductProvider>
+      <WishlistProvider>
+        <ProductProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </ProductProvider>
+      </WishlistProvider>
     </BrowserRouter>
     ,
   </StrictMode>,
