@@ -4,10 +4,7 @@ import { WishlistContext } from "./WishlistContext";
 export function WishlistProvider({ children }) {
   const [wishlistItems, setWishlistItems] = useState(() => {
     const savedWishlist = localStorage.getItem("wishlistItems");
-    if (savedWishlist) {
-      return JSON.parse(savedWishlist);
-    }
-    return [];
+    return savedWishlist ? JSON.parse(savedWishlist) : [];
   });
 
   function isInWishlist(productId) {
@@ -28,11 +25,11 @@ export function WishlistProvider({ children }) {
     });
   }
 
-  const wishListCount = wishlistItems.length;
+  const wishlistCount = wishlistItems.length;
 
   return (
     <WishlistContext.Provider
-      value={{ wishlistItems, toggleWishlist, wishListCount, isInWishlist }}
+      value={{ wishlistItems, toggleWishlist, wishlistCount, isInWishlist }}
     >
       {children}
     </WishlistContext.Provider>
