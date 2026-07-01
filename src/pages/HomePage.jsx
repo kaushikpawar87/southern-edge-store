@@ -5,6 +5,7 @@ import ProductCard from "../components/ProductCard";
 import { categories } from "../data/categories";
 import { useCart } from "../context/hooks/useCart.js";
 import { useProducts } from "../context/hooks/useProducts.js";
+import WishlistPage from "./WishlistPage.jsx";
 
 function HomePage() {
   const { cartCount, addToCart } = useCart();
@@ -41,6 +42,10 @@ function HomePage() {
             />
           ))}
         </div>
+      </section>
+      <section>
+        <h2>Wishlist</h2>
+        <WishlistPage />
       </section>
     </>
   );

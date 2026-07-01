@@ -10,6 +10,7 @@ function Navbar() {
     { label: "Products", path: "/products" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
+    { label: "❤️", path: "/wishlist" },
   ];
 
   return (
