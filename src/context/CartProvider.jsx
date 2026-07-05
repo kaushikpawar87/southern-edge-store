@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { CartContext } from "./CartContext.js";
 import { useLocalStorage } from "../hooks/useLocalStorage.js";
 
