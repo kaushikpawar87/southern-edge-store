@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
 import { WishlistContext } from "./WishlistContext";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export function WishlistProvider({ children }) {
-  const [wishlistItems, setWishlistItems] = useState(() => {
-    const savedWishlist = localStorage.getItem("wishlistItems");
-    return savedWishlist ? JSON.parse(savedWishlist) : [];
-  });
-
+  const [wishlistItems, setWishlistItems] = useLocalStorage(
+    "wishlistItems",
+    [],
+  );
   function isInWishlist(productId) {
     return wishlistItems.some((item) => item.id === productId);
   }
-
-  useEffect(() => {
-    localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
-  }, [wishlistItems]);
-
   function toggleWishlist(product) {
     setWishlistItems((prevItems) => {
       const exists = prevItems.find((item) => item.id === product.id);
