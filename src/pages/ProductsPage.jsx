@@ -1,13 +1,17 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import "../styles/products-page.css";
 import { useProducts } from "../context/hooks/useProducts";
+import ToastContext from "../context/ToastContext";
 
 function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
   const { products, loading, error } = useProducts();
+
+  const toast = useContext(ToastContext);
+  console.log("this is ToastContext", toast);
 
   const brands = useMemo(() => {
     console.log("claculating brands");
