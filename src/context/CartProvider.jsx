@@ -55,7 +55,7 @@ export function CartProvider({ children }) {
     [setCartItems],
   );
 
-  const handleAddToCart = useCallback(
+  const addToCart = useCallback(
     (product) => {
       setCartItems((prevItems) => {
         const existingItem = prevItems.find((item) => item.id === product.id);
@@ -91,7 +91,7 @@ export function CartProvider({ children }) {
       value={{
         cartItems,
         setCartItems,
-        handleAddToCart,
+        addToCart,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,

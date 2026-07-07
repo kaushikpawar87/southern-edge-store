@@ -7,16 +7,19 @@ import "./styles/global.css";
 import { CartProvider } from "./context/CartProvider.jsx";
 import ProductProvider from "./context/ProductsProvider.jsx";
 import { WishlistProvider } from "./context/WishListProvider.jsx";
+import { ToastProvider } from "./context/ToastProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <WishlistProvider>
-        <ProductProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </ProductProvider>
-      </WishlistProvider>
+      <ToastProvider>
+        <WishlistProvider>
+          <ProductProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </ProductProvider>
+        </WishlistProvider>
+      </ToastProvider>
     </BrowserRouter>
     ,
   </StrictMode>,
