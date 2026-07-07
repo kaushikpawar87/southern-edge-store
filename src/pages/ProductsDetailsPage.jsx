@@ -3,11 +3,13 @@ import "../styles/product-details.css";
 import Button from "../components/Button";
 import { useCart } from "../context/hooks/useCart.js";
 import { useProducts } from "../context/hooks/useProducts.js";
+import { useToast } from "../context/hooks/useToast.js";
 
 function ProductsDetailsPage() {
   const { addToCart } = useCart();
   const { id } = useParams();
   const { products } = useProducts();
+  const { showToast } = useToast();
 
   const product = products.find((product) => product.id === Number(id));
 
@@ -29,7 +31,14 @@ function ProductsDetailsPage() {
         <p>{product.brand}</p>
         <p>${product.price}</p>
 
-        <Button onClick={() => addToCart(product)}>Add to Cart</Button>
+        <Button
+          onClick={() => {
+            addToCart(product);
+            showToast(`${product.name} added to cart`, "success");
+          }}
+        >
+          Add to Cart
+        </Button>
       </div>
     </section>
   );

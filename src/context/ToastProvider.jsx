@@ -10,6 +10,7 @@ export function ToastProvider({ children }) {
   });
 
   function showToast(message, type = "success") {
+    console.log("showToast called:", message);
     setToast({
       message,
       type,

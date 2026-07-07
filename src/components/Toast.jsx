@@ -1,5 +1,7 @@
+import "../styles/toast.css";
+
 function Toast({ toast }) {
-  if (!toast.visble) {
+  if (!toast.visible) {
     return null;
   }
 
