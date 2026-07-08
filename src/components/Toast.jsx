@@ -5,7 +5,15 @@ function Toast({ toast }) {
     return null;
   }
 
-  return <div className={`toast toast-${toast.type}`}>{toast.message}</div>;
+  return (
+    <div className={`toast toast-${toast.type}`}>
+      <div className="toast-content">
+        <strong>{toast.title}</strong>
+        <p>{toast.message}</p>
+      </div>
+      <button onClick={onclose}>x</button>
+    </div>
+  );
 }
 
 export default Toast;

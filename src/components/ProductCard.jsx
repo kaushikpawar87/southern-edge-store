@@ -25,7 +25,11 @@ function ProductCard({ product }) {
       <Button
         onClick={() => {
           addToCart(product);
-          showToast(`${product.name} added to cart`, "success");
+          showToast({
+            title: "Added to Cart",
+            message: `${product.name} was added to cart`,
+            type: "success",
+          });
         }}
       >
         Add To Cart
@@ -34,10 +38,13 @@ function ProductCard({ product }) {
         onClick={() => {
           const alreadyInWishlist = isInWishlist(product.id);
           toggleWishlist(product);
+          const title = alreadyInWishlist
+            ? "Removed from Wishlist"
+            : "Added to Wishlist";
           const message = alreadyInWishlist
-            ? `${product.name} removed from wishlist`
-            : `${product.name} added to wishlist`;
-          showToast(message, "success");
+            ? `${product.name} was removed from wishlist`
+            : `${product.name} is added to wishlist`;
+          showToast({ title: title, message: message, type: "success" });
         }}
       >
         {isInWishlist(product.id) ? "❤️" : "🤍"}

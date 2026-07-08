@@ -11,7 +11,6 @@ export function ToastProvider({ children }) {
   });
 
   function showToast({ title, message, type = "success", duration = 3000 }) {
-    console.log("showToast called:", message);
     setToast({
       title,
       message,
