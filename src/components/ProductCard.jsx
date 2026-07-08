@@ -34,13 +34,10 @@ function ProductCard({ product }) {
         onClick={() => {
           const alreadyInWishlist = isInWishlist(product.id);
           toggleWishlist(product);
-          // showToast(`${product.name} added to wishlist`, "success");
-
-          if (alreadyInWishlist) {
-            showToast(`${product.name} removed from wishlist`, "success");
-          } else {
-            showToast(`${product.name} added to wishlist`, "success");
-          }
+          const message = alreadyInWishlist
+            ? `${product.name} removed from wishlist`
+            : `${product.name} added to wishlist`;
+          showToast(message, "success");
         }}
       >
         {isInWishlist(product.id) ? "❤️" : "🤍"}

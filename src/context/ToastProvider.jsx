@@ -4,14 +4,16 @@ import Toast from "../components/Toast";
 
 export function ToastProvider({ children }) {
   const [toast, setToast] = useState({
+    title: "",
     message: "",
     type: "success",
     visible: false,
   });
 
-  function showToast(message, type = "success") {
+  function showToast({ title, message, type = "success", duration = 3000 }) {
     console.log("showToast called:", message);
     setToast({
+      title,
       message,
       type,
       visible: true,
@@ -19,12 +21,17 @@ export function ToastProvider({ children }) {
 
     setTimeout(() => {
       setToast((prevToast) => ({ ...prevToast, visible: false }));
-    }, 3000);
+    }, duration);
   }
+
+  function hideToast() {
+    setToast((prevToast) => ({ ...prevToast, visible: false }));
+  }
+
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
-      <Toast toast={toast} />
+      <Toast toast={toast} onClose={hideToast} />
     </ToastContext.Provider>
   );
 }
