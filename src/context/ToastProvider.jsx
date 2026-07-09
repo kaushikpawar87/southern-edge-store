@@ -7,15 +7,10 @@ export function ToastProvider({ children }) {
     title: "",
     message: "",
     type: "success",
-    visible: true,
+    visible: false,
   });
 
-  function showToast({
-    title,
-    message,
-    type = "success",
-    // duration = 3000,
-  }) {
+  function showToast({ title, message, type = "success", duration = 3000 }) {
     setToast({
       title,
       message,
@@ -23,9 +18,9 @@ export function ToastProvider({ children }) {
       visible: true,
     });
 
-    // setTimeout(() => {
-    //   setToast((prevToast) => ({ ...prevToast, visible: false }));
-    // }, duration);
+    setTimeout(() => {
+      setToast((prevToast) => ({ ...prevToast, visible: false }));
+    }, duration);
   }
 
   function hideToast() {

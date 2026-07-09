@@ -1,15 +1,19 @@
 import Button from "../components/Button";
 import OrderSummary from "../components/OrderSummary";
 import { useCart } from "../context/hooks/useCart.js";
+import { useToast } from "../context/hooks/useToast.js";
 import "../styles/cart-page.css";
 
 function CartPage() {
-  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } =
-    useCart();
+  const {
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    subTotal,
+  } = useCart();
 
-  const subTotal = cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  const { showToast } = useToast();
 
   return (
     <section className="cart-page">
@@ -46,7 +50,17 @@ function CartPage() {
                     </td>
                     <td>${(item.price * item.quantity).toFixed(2)}</td>
                     <td>
-                      <Button onClick={() => removeFromCart(item.id)}>
+                      <Button
+                        onClick={() => {
+                          (removeFromCart(item.id),
+                            showToast({
+                              title: "Removed",
+                              message: `${item.name} was removed from cart`,
+                              type: "success",
+                              duration: 3000,
+                            }));
+                        }}
+                      >
                         Remove
                       </Button>
                     </td>
