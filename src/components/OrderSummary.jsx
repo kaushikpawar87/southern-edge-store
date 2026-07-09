@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 function OrderSummary({ subTotal }) {
   const shipping = 15;
@@ -20,7 +21,7 @@ function OrderSummary({ subTotal }) {
 
       <h3>Total: ${total}</h3>
       <Link to={"/checkout"}>
-        <button>Checkout</button>
+        <Button>Checkout</Button>
       </Link>
     </div>
   );
