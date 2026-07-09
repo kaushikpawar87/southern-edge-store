@@ -29,6 +29,7 @@ function ProductCard({ product }) {
             title: "Added to Cart",
             message: `${product.name} was added to cart`,
             type: "success",
+            duration: 10000,
           });
         }}
       >

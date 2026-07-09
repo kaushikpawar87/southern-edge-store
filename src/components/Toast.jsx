@@ -1,6 +1,6 @@
 import "../styles/toast.css";
 
-function Toast({ toast }) {
+function Toast({ toast, onClose }) {
   if (!toast.visible) {
     return null;
   }
@@ -11,7 +11,7 @@ function Toast({ toast }) {
         <strong>{toast.title}</strong>
         <p>{toast.message}</p>
       </div>
-      <button onClick={onclose}>x</button>
+      <button onClick={onClose}>x</button>
     </div>
   );
 }

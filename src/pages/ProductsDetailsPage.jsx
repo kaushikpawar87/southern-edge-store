@@ -34,7 +34,12 @@ function ProductsDetailsPage() {
         <Button
           onClick={() => {
             addToCart(product);
-            showToast(`${product.name} added to cart`, "success");
+            showToast({
+              title: "Added to Cart",
+              message: `${product.name} was added to cart`,
+              type: "success",
+              duration: 10000,
+            });
           }}
         >
           Add to Cart
