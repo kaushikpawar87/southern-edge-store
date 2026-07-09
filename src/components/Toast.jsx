@@ -7,11 +7,14 @@ function Toast({ toast, onClose }) {
 
   return (
     <div className={`toast toast-${toast.type}`}>
-      <div className="toast-content">
-        <strong>{toast.title}</strong>
+      <div className="toast-icon">✅</div>
+      <div className="toast-body">
+        <h4>{toast.title}</h4>
         <p>{toast.message}</p>
       </div>
-      <button onClick={onClose}>x</button>
+      <button className="toast-close" onClick={onClose}>
+        x
+      </button>
     </div>
   );
 }
