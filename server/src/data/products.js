@@ -41,4 +41,11 @@ export const products = [
     brand: "Kookaburra",
     image: "/product-images/kookaburra-ghost.jpg",
   },
+  {
+    id: 7,
+    name: "SS Super Select",
+    price: 1999,
+    brand: "SS",
+    image: "/product-images/ss-ton-reserve.jpg",
+  },
 ];

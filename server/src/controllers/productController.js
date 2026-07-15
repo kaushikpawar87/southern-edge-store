@@ -1,4 +1,8 @@
-import { getAllProducts, getProductById } from "../services/productService.js";
+import {
+  getAllProducts,
+  getProductById,
+  getProductByBrand,
+} from "../services/productService.js";
 
 export function getProducts(req, res) {
   const products = getAllProducts();
@@ -16,4 +20,16 @@ export function getProduct(req, res) {
     });
   }
   res.status(200).json(product);
+}
+
+export function getBrand(req, res) {
+  const brand = req.params.brand;
+  const productBrand = getProductByBrand(brand);
+
+  if (!productBrand) {
+    return res.status(404).json({
+      message: "Brand not found",
+    });
+  }
+  res.status(200).json(productBrand);
 }
