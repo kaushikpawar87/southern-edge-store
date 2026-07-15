@@ -1,4 +1,4 @@
-import { getAllProducts } from "../services/productService";
+import { getAllProducts } from "../services/productService.js";
 
 export function getProducts(req, res) {
   const products = getAllProducts();
