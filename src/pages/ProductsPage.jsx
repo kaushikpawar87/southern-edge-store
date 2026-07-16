@@ -10,7 +10,6 @@ function ProductsPage() {
   const { products, loading, error } = useProducts();
 
   const brands = useMemo(() => {
-    console.log("claculating brands");
     return ["All", ...new Set(products.map((product) => product.brand))];
   }, [products]);
 
