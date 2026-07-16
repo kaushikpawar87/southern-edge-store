@@ -14,7 +14,9 @@ function Hero() {
         <Link to="/products" className="">
           <Button className="primary-btn">Shop Now</Button>
         </Link>
-        <Button className="secondary-btn">Learn More</Button>
+        <Link to="/about">
+          <Button className="secondary-btn">Learn More</Button>
+        </Link>
       </div>
     </section>
   );

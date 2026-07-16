@@ -23,7 +23,7 @@ export function getProduct(req, res) {
 }
 
 export function getBrand(req, res) {
-  const brand = req.params.brand;
+  const brand = req.query.brand;
   const productBrand = getProductByBrand(brand);
 
   if (!productBrand) {

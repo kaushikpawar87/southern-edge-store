@@ -11,18 +11,14 @@ function ProductProvider({ children }) {
       try {
         setLoading(true);
 
-        const response = await fetch("https://fakestoreapi.com/products");
+        const response = await fetch("http://localhost:3000/api/products");
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
         const data = await response.json();
 
-        const transformedProducts = data.map((product) => ({
-          id: product.id,
-          name: product.title,
-          brand: product.category,
-          price: product.price,
-          image: product.image,
-        }));
-
-        setProducts(transformedProducts);
+        setProducts(data);
       } catch (error) {
         console.log(error);
         setError("Products failed to load");
