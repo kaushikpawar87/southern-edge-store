@@ -1,6 +1,6 @@
 import { products } from "../data/products.js";
 
-export function getAllProducts({ brand, search }) {
+export function getAllProducts({ brand, search, sort }) {
   let filteredProducts = [...products];
 
   if (brand) {
@@ -13,6 +13,14 @@ export function getAllProducts({ brand, search }) {
     filteredProducts = filteredProducts.filter((product) =>
       product.name.toLowerCase().includes(search.toLowerCase()),
     );
+  }
+
+  if (sort === "price") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  }
+
+  if (sort === "-price") {
+    filteredProducts.sort((a, b) => b.price - a.price);
   }
 
   return filteredProducts;

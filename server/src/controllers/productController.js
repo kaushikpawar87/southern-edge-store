@@ -1,9 +1,9 @@
 import { getAllProducts, getProductById } from "../services/productService.js";
 
 export function getProducts(req, res) {
-  const { brand, search } = req.query;
+  const { brand, search, sort } = req.query;
 
-  const products = getAllProducts({ brand, search });
+  const products = getAllProducts({ brand, search, sort });
 
   res.status(200).json(products);
 }
