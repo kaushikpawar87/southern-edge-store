@@ -45,3 +45,13 @@ export function getAllProducts({ brand, search, sort, page = 1, limit = 10 }) {
 export function getProductById(productId) {
   return products.find((product) => product.id === productId);
 }
+
+export function createNewProduct(productData) {
+  const newProduct = {
+    id: String(Date.now()),
+    ...productData,
+  };
+  products.push(newProduct);
+
+  return newProduct;
+}

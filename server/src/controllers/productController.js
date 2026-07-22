@@ -1,4 +1,8 @@
-import { getAllProducts, getProductById } from "../services/productService.js";
+import {
+  getAllProducts,
+  getProductById,
+  createNewProduct,
+} from "../services/productService.js";
 
 export function getProducts(req, res) {
   const { brand, search, sort, page, limit } = req.query;
@@ -18,4 +22,12 @@ export function getProduct(req, res) {
     });
   }
   res.status(200).json(product);
+}
+
+export function createProduct(req, res) {
+  const productData = req.body;
+
+  const newProduct = createNewProduct(productData);
+
+  return res.status(201).json(newProduct);
 }
