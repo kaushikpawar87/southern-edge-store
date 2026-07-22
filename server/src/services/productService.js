@@ -1,6 +1,6 @@
 import { products } from "../data/products.js";
 
-export function getAllProducts({ brand, search, sort }) {
+export function getAllProducts({ brand, search, sort, page = 1, limit = 10 }) {
   let filteredProducts = [...products];
 
   if (brand) {
@@ -23,7 +23,23 @@ export function getAllProducts({ brand, search, sort }) {
     filteredProducts.sort((a, b) => b.price - a.price);
   }
 
-  return filteredProducts;
+  const pageNumber = Number(page);
+  const limitNumber = Number(limit);
+
+  const startIndex = (pageNumber - 1) * limitNumber;
+  const endIndex = startIndex + limitNumber;
+
+  const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+
+  return {
+    products: paginatedProducts,
+    pagination: {
+      currentPage: pageNumber,
+      limit: limitNumber,
+      totalProducts: filteredProducts.length,
+      totalPages: Math.ceil(filteredProducts.length / limitNumber),
+    },
+  };
 }
 
 export function getProductById(productId) {

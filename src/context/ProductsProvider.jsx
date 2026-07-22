@@ -18,7 +18,7 @@ function ProductProvider({ children }) {
 
         const data = await response.json();
 
-        setProducts(data);
+        setProducts(data.products);
       } catch (error) {
         console.log(error);
         setError("Products failed to load");
