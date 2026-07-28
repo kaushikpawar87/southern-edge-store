@@ -25,9 +25,27 @@ export function getProduct(req, res) {
 }
 
 export function createProduct(req, res) {
-  const productData = req.body;
+  const { name, brand, price, description } = req.body;
 
-  const newProduct = createNewProduct(productData);
+  if (!name || !brand || price === undefined) {
+    return res.status(400).json({
+      message: "Name, brand and price are required.",
+    });
+  }
+
+  if (typeof name !== "string" || typeof brand !== "string") {
+    res.status(400).json({
+      message: "Name and brand must be a string",
+    });
+  }
+
+  if (typeof price !== "number" || price <= 0) {
+    res.status(400).json({
+      message: "Price must be a number greater than 0",
+    });
+  }
+
+  const newProduct = createNewProduct({ name, brand, price, description });
 
   return res.status(201).json(newProduct);
 }
