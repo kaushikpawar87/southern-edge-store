@@ -15,6 +15,7 @@ function ProductsPage() {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
+      console.log(products);
       const matchesSearch =
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.brand.toLowerCase().includes(searchTerm.toLowerCase());

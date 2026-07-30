@@ -48,10 +48,27 @@ export function getProductById(productId) {
 
 export function createNewProduct(productData) {
   const newProduct = {
-    id: String(Date.now()),
+    id: Date.now(),
     ...productData,
   };
   products.push(newProduct);
 
   return newProduct;
+}
+
+export function updateProductById(id, productData) {
+  const productIndex = products.findIndex((product) => product.id === id);
+
+  if (productIndex === -1) {
+    return null;
+  }
+
+  const updatedProduct = {
+    id,
+    ...productData,
+  };
+
+  products[productIndex] = updatedProduct;
+
+  return updatedProduct;
 }
