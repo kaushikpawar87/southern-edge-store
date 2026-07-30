@@ -16,12 +16,6 @@ export function getProducts(req, res) {
 export function getProduct(req, res) {
   const id = Number(req.params.id);
 
-  if (Number.isNaN(id)) {
-    return res.status(400).json({
-      message: "Product ID must be a number",
-    });
-  }
-
   const product = getProductById(id);
 
   if (!product) {
@@ -42,12 +36,6 @@ export function createProduct(req, res) {
 
 export function updateProduct(req, res) {
   const id = Number(req.params.id);
-
-  if (Number.isNaN(id)) {
-    return res.status(400).json({
-      message: "Product ID must be a number",
-    });
-  }
 
   const { name, brand, price, description } = req.body;
 
