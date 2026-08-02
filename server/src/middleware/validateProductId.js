@@ -6,5 +6,7 @@ export function validateProductId(req, res, next) {
       message: "Product ID must be a number.",
     });
   }
+  req.productId = id;
+
   next();
 }

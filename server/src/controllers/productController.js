@@ -3,6 +3,7 @@ import {
   getProductById,
   createNewProduct,
   updateProductById,
+  deleteProductById,
 } from "../services/productService.js";
 
 export function getProducts(req, res) {
@@ -14,7 +15,11 @@ export function getProducts(req, res) {
 }
 
 export function getProduct(req, res) {
-  const id = Number(req.params.id);
+  console.log("Route parameter", req.params.id);
+  console.log("Validated product ID", req.productId);
+  console.log("Validated ID type", typeof req.productId);
+
+  const id = req.productId;
 
   const product = getProductById(id);
 
@@ -35,7 +40,7 @@ export function createProduct(req, res) {
 }
 
 export function updateProduct(req, res) {
-  const id = Number(req.params.id);
+  const id = req.productId;
 
   const { name, brand, price, description } = req.body;
 
@@ -52,4 +57,21 @@ export function updateProduct(req, res) {
     });
   }
   return res.status(200).json(updatedProduct);
+}
+
+export function deleteProduct(req, res) {
+  const id = req.productId;
+
+  const deletedProduct = deleteProductById(id);
+
+  if (!deletedProduct) {
+    return res.status(404).json({
+      message: "Product not found",
+    });
+  }
+
+  return res.status(200).json({
+    message: "Product deleted successfully",
+    product: deletedProduct,
+  });
 }
