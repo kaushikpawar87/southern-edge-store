@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
+import { notFoundHandler, errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 app.use(cors({ origin: "http://localhost:5173" }));
@@ -13,5 +14,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 export default app;
