@@ -6,12 +6,16 @@ import {
   deleteProductById,
 } from "../services/productService.js";
 
-export function getProducts(req, res) {
-  const { brand, search, sort, page, limit } = req.query;
+export async function getProducts(req, res, next) {
+  try {
+    const products = await getAllProducts();
 
-  const products = getAllProducts({ brand, search, sort, page, limit });
-
-  return res.status(200).json(products);
+    return res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    return next(error);
+  }
 }
 
 export function getProduct(req, res) {

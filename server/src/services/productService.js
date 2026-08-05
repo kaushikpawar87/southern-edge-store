@@ -1,45 +1,40 @@
 import { products } from "../data/products.js";
+import { pool } from "../config/database.js";
 
-export function getAllProducts({ brand, search, sort, page = 1, limit = 10 }) {
-  let filteredProducts = [...products];
+export async function getAllProducts() {
+  const result = await pool.query(`
 
-  if (brand) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.brand.toLowerCase() === brand.toLowerCase(),
-    );
-  }
+    SELECT
 
-  if (search) {
-    filteredProducts = filteredProducts.filter((product) =>
-      product.name.toLowerCase().includes(search.toLowerCase()),
-    );
-  }
+      id,
 
-  if (sort === "price") {
-    filteredProducts.sort((a, b) => a.price - b.price);
-  }
+      name,
 
-  if (sort === "-price") {
-    filteredProducts.sort((a, b) => b.price - a.price);
-  }
+      brand,
 
-  const pageNumber = Number(page);
-  const limitNumber = Number(limit);
+      price,
 
-  const startIndex = (pageNumber - 1) * limitNumber;
-  const endIndex = startIndex + limitNumber;
+      description,
 
-  const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+      image_url,
 
-  return {
-    products: paginatedProducts,
-    pagination: {
-      currentPage: pageNumber,
-      limit: limitNumber,
-      totalProducts: filteredProducts.length,
-      totalPages: Math.ceil(filteredProducts.length / limitNumber),
-    },
-  };
+      stock_quantity,
+
+      is_active,
+
+      created_at,
+
+      updated_at
+
+    FROM products
+
+    ORDER BY id ASC
+
+  `);
+
+  // console.log(result.rows);
+
+  return result.rows;
 }
 
 export function getProductById(productId) {
