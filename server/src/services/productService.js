@@ -32,7 +32,7 @@ export async function getAllProducts() {
 
   `);
 
-  // console.log(result.rows);
+  console.log(result.rows);
 
   return result.rows;
 }
