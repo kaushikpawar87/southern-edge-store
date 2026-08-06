@@ -18,21 +18,21 @@ export async function getProducts(req, res, next) {
   }
 }
 
-export function getProduct(req, res) {
-  console.log("Route parameter", req.params.id);
-  console.log("Validated product ID", req.productId);
-  console.log("Validated ID type", typeof req.productId);
+export async function getProduct(req, res, next) {
+  try {
+    const id = req.productId;
 
-  const id = req.productId;
+    const product = await getProductById(id);
 
-  const product = getProductById(id);
-
-  if (!product) {
-    return res.status(404).json({
-      message: "Product not found",
-    });
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+    return res.status(200).json(product);
+  } catch (error) {
+    return next(error);
   }
-  return res.status(200).json(product);
 }
 
 export function createProduct(req, res) {

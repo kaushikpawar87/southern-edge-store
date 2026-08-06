@@ -34,24 +34,28 @@ export async function getAllProducts() {
 
   console.log(result.rows);
 
-  return result.rows;
+  return result.rows[0];
 }
 
-export function getProductById(productId) {
-  console.log("Searching for ID:", productId);
-
-  console.log("Searching ID type:", typeof productId);
-
-  console.log(
-    "Available product IDs:",
-
-    products.map((product) => ({
-      id: product.id,
-
-      type: typeof product.id,
-    })),
+export async function getProductById(productId) {
+  const result = await pool.query(
+    `SELECT 
+    id, 
+    name,
+    brand,
+    price,
+    description, 
+    image_url,
+    stock_quantity, 
+    is_active, 
+    created_at, 
+    updated_at
+    FROM products
+    WHERE id = $1
+    `,
+    [productId],
   );
-  return products.find((product) => product.id === productId);
+  return result.rows;
 }
 
 export function createNewProduct(productData) {

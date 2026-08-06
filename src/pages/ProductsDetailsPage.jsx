@@ -24,7 +24,7 @@ function ProductsDetailsPage() {
   return (
     <section className="product-details">
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        <img src={product.image_url} alt={product.name} />
       </div>
       <div className="product-info">
         <h1>{product.name}</h1>
