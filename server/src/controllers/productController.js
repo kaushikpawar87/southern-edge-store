@@ -35,12 +35,16 @@ export async function getProduct(req, res, next) {
   }
 }
 
-export function createProduct(req, res) {
-  const { name, brand, price, description } = req.body;
+export async function createProduct(req, res, next) {
+  try {
+    const { name, brand, price, description } = req.body;
 
-  const newProduct = createNewProduct({ name, brand, price, description });
+    const newProduct = createNewProduct({ name, brand, price, description });
 
-  return res.status(201).json(newProduct);
+    return res.status(201).json(newProduct);
+  } catch (error) {
+    return next(error);
+  }
 }
 
 export function updateProduct(req, res) {
