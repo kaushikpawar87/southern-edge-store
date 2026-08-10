@@ -22,7 +22,7 @@ export async function getAllProducts() {
 
   console.log(result.rows);
 
-  return result.rows[0];
+  return result.rows;
 }
 
 export async function getProductById(productId) {
@@ -43,13 +43,13 @@ export async function getProductById(productId) {
     `,
     [productId],
   );
-  return result.rows;
+  return result.rows[0];
 }
 
 export async function createNewProduct(productData) {
   const { name, brand, price, description, image } = productData;
 
-  const result = pool.query(
+  const result = await pool.query(
     `
   INSERT INTO products (
   name, 

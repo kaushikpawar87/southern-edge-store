@@ -37,9 +37,15 @@ export async function getProduct(req, res, next) {
 
 export async function createProduct(req, res, next) {
   try {
-    const { name, brand, price, description } = req.body;
+    const { name, brand, price, description, image } = req.body;
 
-    const newProduct = createNewProduct({ name, brand, price, description });
+    const newProduct = await createNewProduct({
+      name,
+      brand,
+      price,
+      description,
+      image,
+    });
 
     return res.status(201).json(newProduct);
   } catch (error) {
