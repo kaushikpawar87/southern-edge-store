@@ -56,13 +56,14 @@ export async function createProduct(req, res, next) {
 export function updateProduct(req, res) {
   const id = req.productId;
 
-  const { name, brand, price, description } = req.body;
+  const { name, brand, price, description, image_url } = req.body;
 
   const updatedProduct = updateProductById(id, {
     name,
     brand,
     price,
     description,
+    image_url,
   });
 
   if (!updatedProduct) {

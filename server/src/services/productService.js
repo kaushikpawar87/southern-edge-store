@@ -76,21 +76,37 @@ export async function createNewProduct(productData) {
   return result.rows[0];
 }
 
-export function updateProductById(id, productData) {
-  const productIndex = products.findIndex((product) => product.id === id);
+export async function updateProductById(id, productData) {
+  const { name, brand, price, description, image } = productData;
 
-  if (productIndex === -1) {
-    return null;
-  }
+  const result = await pool.query(
+    `
+UPDATE products
+SET 
+name = $1,
+brand = $2,
+price = $3, 
+description = $4,
+image_url = $5
+updated_at = CURRENT_TIMESTAMP
 
-  const updatedProduct = {
-    id,
-    ...productData,
-  };
 
-  products[productIndex] = updatedProduct;
+WHERE id = $6
+RETURNING 
+id,
+name,
+brand,
+price, 
+description,
+image_url,
+stock_quantity, 
+is_active, 
+created_at,
+updated_at`,
+    [name, brand, price, description, image, id],
+  );
 
-  return updatedProduct;
+  return result.rows[0];
 }
 
 export function deleteProductById(id) {
