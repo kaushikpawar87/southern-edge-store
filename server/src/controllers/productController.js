@@ -53,25 +53,29 @@ export async function createProduct(req, res, next) {
   }
 }
 
-export function updateProduct(req, res) {
-  const id = req.productId;
+export async function updateProduct(req, res, next) {
+  try {
+    const id = req.productId;
 
-  const { name, brand, price, description, image_url } = req.body;
+    const { name, brand, price, description, image_url } = req.body;
 
-  const updatedProduct = updateProductById(id, {
-    name,
-    brand,
-    price,
-    description,
-    image_url,
-  });
-
-  if (!updatedProduct) {
-    return res.status(404).json({
-      message: "Product not found.",
+    const updatedProduct = await updateProductById(id, {
+      name,
+      brand,
+      price,
+      description,
+      image_url,
     });
+
+    if (!updatedProduct) {
+      return res.status(404).json({
+        message: "Product not found.",
+      });
+    }
+    return res.status(200).json(updatedProduct);
+  } catch (error) {
+    return next(error);
   }
-  return res.status(200).json(updatedProduct);
 }
 
 export function deleteProduct(req, res) {

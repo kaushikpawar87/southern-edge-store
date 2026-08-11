@@ -89,8 +89,6 @@ price = $3,
 description = $4,
 image_url = $5
 updated_at = CURRENT_TIMESTAMP
-
-
 WHERE id = $6
 RETURNING 
 id,
