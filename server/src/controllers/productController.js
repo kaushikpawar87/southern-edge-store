@@ -37,7 +37,7 @@ export async function getProduct(req, res, next) {
 
 export async function createProduct(req, res, next) {
   try {
-    const { name, brand, price, description, image } = req.body;
+    const { name, brand, price, description, image_url } = req.body;
 
     const newProduct = await createNewProduct({
       name,
@@ -78,19 +78,23 @@ export async function updateProduct(req, res, next) {
   }
 }
 
-export function deleteProduct(req, res) {
-  const id = req.productId;
+export async function deleteProduct(req, res, next) {
+  try {
+    const id = req.productId;
 
-  const deletedProduct = deleteProductById(id);
+    const deletedProduct = await deleteProductById(id);
 
-  if (!deletedProduct) {
-    return res.status(404).json({
-      message: "Product not found",
+    if (!deletedProduct) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Product deleted successfully",
+      product: deletedProduct,
     });
+  } catch (error) {
+    return next(error);
   }
-
-  return res.status(200).json({
-    message: "Product deleted successfully",
-    product: deletedProduct,
-  });
 }

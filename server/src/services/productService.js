@@ -1,4 +1,3 @@
-import { products } from "../data/products.js";
 import { pool } from "../config/database.js";
 
 export async function getAllProducts() {
@@ -47,7 +46,7 @@ export async function getProductById(productId) {
 }
 
 export async function createNewProduct(productData) {
-  const { name, brand, price, description, image } = productData;
+  const { name, brand, price, description, image_url } = productData;
 
   const result = await pool.query(
     `
@@ -71,13 +70,13 @@ export async function createNewProduct(productData) {
   created_at,
   updated_at
   `,
-    [name, brand, price, description, image],
+    [name, brand, price, description, image_url],
   );
   return result.rows[0];
 }
 
 export async function updateProductById(id, productData) {
-  const { name, brand, price, description, image } = productData;
+  const { name, brand, price, description, image_url } = productData;
 
   const result = await pool.query(
     `
@@ -87,7 +86,7 @@ name = $1,
 brand = $2,
 price = $3, 
 description = $4,
-image_url = $5
+image_url = $5,
 updated_at = CURRENT_TIMESTAMP
 WHERE id = $6
 RETURNING 
@@ -101,22 +100,30 @@ stock_quantity,
 is_active, 
 created_at,
 updated_at`,
-    [name, brand, price, description, image, id],
+    [name, brand, price, description, image_url, id],
   );
 
   return result.rows[0];
 }
 
-export function deleteProductById(id) {
-  const productIndex = products.findIndex((product) => product.id === id);
-
-  if (productIndex === -1) {
-    return null;
-  }
-
-  const deletedProduct = products[productIndex];
-
-  products.splice(productIndex, 1);
-
-  return deletedProduct;
+export async function deleteProductById(id) {
+  const result = await pool.query(
+    `
+    DELETE FROM products
+    WHERE id = $1
+    RETURNING 
+    id,
+  name,
+  brand,
+  price, 
+  description,
+  image_url,
+  stock_quantity, 
+  is_active, 
+  created_at,
+  updated_at
+    `,
+    [id],
+  );
+  return result.rows[0];
 }
