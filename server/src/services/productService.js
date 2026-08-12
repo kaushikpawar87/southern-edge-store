@@ -1,23 +1,29 @@
 import { pool } from "../config/database.js";
 
-export async function getAllProducts() {
-  const result = await pool.query(
-    `SELECT
-      id,
-      name,
-      brand,
-      price,
-      description,
-      image_url,
-      stock_quantity,
-      is_active,
-      created_at,
-      updated_at
-    FROM products
-    ORDER BY id ASC
+export async function getAllProducts({ brand }) {
+  let query = `
+SELECT
+  id, 
+  name,
+  brand,
+  price,
+  description, 
+  image_url,
+  stock_quantity,
+  is_active,
+  created_at,
+  updated_at
+FROM products
+`;
 
-  `,
-  );
+  const values = [];
+
+  if (brand) {
+    query += `WHERE LOWER(brand) = LOWER($1)`;
+    values.push(brand);
+  }
+
+  const result = await pool.query(query, values);
 
   console.log(result.rows);
 
@@ -112,7 +118,7 @@ export async function deleteProductById(id) {
     DELETE FROM products
     WHERE id = $1
     RETURNING 
-    id,
+  id,
   name,
   brand,
   price, 
