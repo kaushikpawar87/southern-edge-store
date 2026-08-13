@@ -17,10 +17,15 @@ FROM products
 `;
 
   const values = [];
+  const conditions = [];
 
   if (brand) {
-    query += `WHERE LOWER(brand) = LOWER($1)`;
     values.push(brand);
+    conditions.push(`LOWER(brand) = LOWER($${values.length})`);
+  }
+
+  if (conditions.length > 0) {
+    query += `WHERE ${conditions.join(" AND ")}`;
   }
 
   const result = await pool.query(query, values);

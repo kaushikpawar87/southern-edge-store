@@ -8,7 +8,9 @@ import {
 
 export async function getProducts(req, res, next) {
   try {
-    const products = await getAllProducts();
+    const { brand, search } = req.query;
+    const products = await getAllProducts({ brand, search });
+    console.log(req.query);
 
     return res.status(200).json({
       products,
@@ -44,7 +46,7 @@ export async function createProduct(req, res, next) {
       brand,
       price,
       description,
-      image,
+      image_url,
     });
 
     return res.status(201).json(newProduct);
