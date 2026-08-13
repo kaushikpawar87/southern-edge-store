@@ -1,6 +1,6 @@
 import { pool } from "../config/database.js";
 
-export async function getAllProducts({ brand, search }) {
+export async function getAllProducts({ brand, search, sort }) {
   let query = `
 SELECT
   id, 
@@ -30,9 +30,17 @@ FROM products
   }
 
   if (conditions.length > 0) {
-    query += `WHERE ${conditions.join(" AND ")}`;
+    query += ` WHERE ${conditions.join(" AND ")}`;
   }
 
+  if (sort === "price") {
+    query += ` ORDER BY price ASC`;
+  } else if (sort === "-price") {
+    query += ` ORDER BY price DESC`;
+  }
+
+  console.log("sort:", sort);
+  console.log("query:", query);
   const result = await pool.query(query, values);
 
   console.log(result.rows);
