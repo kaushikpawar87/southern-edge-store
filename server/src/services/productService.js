@@ -1,6 +1,6 @@
 import { pool } from "../config/database.js";
 
-export async function getAllProducts({ brand }) {
+export async function getAllProducts({ brand, search }) {
   let query = `
 SELECT
   id, 
@@ -22,6 +22,11 @@ FROM products
   if (brand) {
     values.push(brand);
     conditions.push(`LOWER(brand) = LOWER($${values.length})`);
+  }
+
+  if (search) {
+    values.push(`%${search}%`);
+    conditions.push(`name ILIKE $${values.length}`);
   }
 
   if (conditions.length > 0) {
