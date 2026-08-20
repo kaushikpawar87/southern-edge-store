@@ -1,6 +1,12 @@
 import { pool } from "../config/database.js";
 
-export async function getAllProducts({ brand, search, sort }) {
+export async function getAllProducts({
+  brand,
+  search,
+  sort,
+  page = 1,
+  limit = 5,
+}) {
   let query = `
 SELECT
   id, 
@@ -18,6 +24,11 @@ FROM products
 
   const values = [];
   const conditions = [];
+
+  const pageNumber = Number(page);
+  const limitNumber = Number(limit);
+
+  const offset = (pageNumber - 1) * limitNumber;
 
   if (brand) {
     values.push(brand);
@@ -39,8 +50,12 @@ FROM products
     query += ` ORDER BY price DESC`;
   }
 
-  console.log("sort:", sort);
-  console.log("query:", query);
+  values.push(limitNumber);
+  query += ` LIMIT $${values.length}`;
+
+  values.push(offset);
+  query += ` OFFSET $${values.length}`;
+
   const result = await pool.query(query, values);
 
   console.log(result.rows);
