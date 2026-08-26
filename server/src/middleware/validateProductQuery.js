@@ -16,9 +16,9 @@ export function validateProductQuery(req, res, next) {
   if (limit !== undefined) {
     const limitNumber = Number(limit);
 
-    if (!Number.isInteger(limitNumber) || limitNumber < 0) {
+    if (!Number.isInteger(limitNumber) || limitNumber < 0 || limitNumber > 50) {
       return res.status(400).json({
-        message: "Limit must be positve integer.",
+        message: "Limit must be an integer between 1 and 50.",
       });
     }
   }
