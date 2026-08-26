@@ -49,6 +49,7 @@ FROM products
   } else if (sort === "-price") {
     query += ` ORDER BY price DESC`;
   }
+  const filterValues = [...values];
 
   values.push(limitNumber);
   query += ` LIMIT $${values.length}`;
@@ -58,9 +59,29 @@ FROM products
 
   const result = await pool.query(query, values);
 
-  console.log(result.rows);
+  let countQuery = `
+  SELECT COUNT(*)
+  FROM products
+  `;
+  if (conditions.length > 0) {
+    countQuery += ` WHERE ${conditions.join(" AND ")}`;
+  }
 
-  return result.rows;
+  const countResult = await pool.query(countQuery, filterValues);
+
+  const totalProducts = Number(countResult.rows[0].count);
+
+  const totalPages = Math.ceil(totalProducts / limitNumber);
+
+  return {
+    products: result.rows,
+    pagination: {
+      currentPage: pageNumber,
+      limit: limitNumber,
+      totalProducts,
+      totalPages,
+    },
+  };
 }
 
 export async function getProductById(productId) {

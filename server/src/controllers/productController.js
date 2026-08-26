@@ -8,13 +8,11 @@ import {
 
 export async function getProducts(req, res, next) {
   try {
-    const { brand, search, sort } = req.query;
-    const products = await getAllProducts({ brand, search, sort });
+    const { brand, search, sort, page, limit } = req.query;
+    const result = await getAllProducts({ brand, search, sort, page, limit });
     console.log(req.query);
 
-    return res.status(200).json({
-      products,
-    });
+    return res.status(200).json(result);
   } catch (error) {
     return next(error);
   }
