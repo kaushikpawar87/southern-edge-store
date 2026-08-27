@@ -187,3 +187,13 @@ export async function deleteProductById(id) {
   );
   return result.rows[0];
 }
+
+export async function getProductBrands() {
+  const result = await pool.query(`
+  SELECT DISTINCT brand
+  FROM products
+  ORDER BY brand ASC
+  `);
+
+  return result.rows.map((row) => row.brand);
+}

@@ -4,6 +4,7 @@ import {
   createNewProduct,
   updateProductById,
   deleteProductById,
+  getProductBrands,
 } from "../services/productService.js";
 
 export async function getProducts(req, res, next) {
@@ -94,6 +95,16 @@ export async function deleteProduct(req, res, next) {
       message: "Product deleted successfully",
       product: deletedProduct,
     });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getBrands(req, res, next) {
+  try {
+    const result = await getProductBrands();
+
+    return res.status(200).json(result);
   } catch (error) {
     return next(error);
   }

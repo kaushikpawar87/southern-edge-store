@@ -5,7 +5,7 @@ import { notFoundHandler, errorHandler } from "./middleware/errorHandler.js";
 import { logger } from "./middleware/logger.js";
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "http://localhost:5174" }));
 app.use(express.json());
 
 app.use(logger);

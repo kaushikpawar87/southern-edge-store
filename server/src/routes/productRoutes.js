@@ -5,6 +5,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  getBrands,
 } from "../controllers/productController.js";
 import { validateProduct } from "../middleware/validateProduct.js";
 import { validateProductId } from "../middleware/validateProductId.js";
@@ -14,6 +15,7 @@ import { logger } from "../middleware/logger.js";
 const router = express.Router();
 
 router.get("/", validateProductQuery, getProducts, logger);
+router.get("/:brands", getBrands);
 router.get("/:id", validateProductId, getProduct);
 router.post("/", validateProduct, createProduct);
 router.put("/:id", validateProductId, validateProduct, updateProduct);
