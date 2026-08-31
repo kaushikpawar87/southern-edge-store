@@ -7,11 +7,7 @@ function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
-  const { products, loading, error } = useProducts();
-
-  const brands = useMemo(() => {
-    return ["All", ...new Set(products.map((product) => product.brand))];
-  }, [products]);
+  const { products, brands, loading, error } = useProducts();
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -61,6 +57,7 @@ function ProductsPage() {
         value={selectedBrand}
         onChange={(event) => setSelectedBrand(event.target.value)}
       >
+        <option value="All">All Brands</option>
         {brands.map((brand) => (
           <option key={brand} value={brand}>
             {brand === "All" ? "All brands" : brand}
