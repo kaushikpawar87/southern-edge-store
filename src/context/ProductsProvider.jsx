@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState("All");
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -12,7 +13,13 @@ function ProductProvider({ children }) {
       try {
         setLoading(true);
 
-        const response = await fetch("http://localhost:3000/api/products");
+        let url = "http://localhost:3000/api/products";
+
+        if (selectedBrand !== "All") {
+          url += `?brand=${selectedBrand}`;
+        }
+
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }
@@ -28,7 +35,7 @@ function ProductProvider({ children }) {
       }
     }
     fetchProducts();
-  }, []);
+  }, [selectedBrand]);
 
   useEffect(() => {
     async function fetchProductBrands() {
@@ -51,7 +58,16 @@ function ProductProvider({ children }) {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, brands, loading, error }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        brands,
+        loading,
+        error,
+        selectedBrand,
+        setSelectedBrand,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );

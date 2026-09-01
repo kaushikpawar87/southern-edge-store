@@ -5,9 +5,9 @@ import { useProducts } from "../context/hooks/useProducts";
 
 function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("All");
   const [sortOption, setSortOption] = useState("featured");
-  const { products, brands, loading, error } = useProducts();
+  const { products, brands, loading, error, selectedBrand, setSelectedBrand } =
+    useProducts();
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
