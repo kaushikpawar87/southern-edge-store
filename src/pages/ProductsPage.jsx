@@ -4,26 +4,20 @@ import "../styles/products-page.css";
 import { useProducts } from "../context/hooks/useProducts";
 
 function ProductsPage() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("featured");
-  const { products, brands, loading, error, selectedBrand, setSelectedBrand } =
-    useProducts();
-
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      const matchesSearch =
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchTerm.toLowerCase());
-
-      const matchesBrand =
-        selectedBrand === "All" || product.brand === selectedBrand;
-
-      return matchesSearch && matchesBrand;
-    });
-  }, [products, searchTerm, selectedBrand]);
+  const {
+    products,
+    brands,
+    loading,
+    error,
+    selectedBrand,
+    setSelectedBrand,
+    searchTerm,
+    setSearchTerm,
+  } = useProducts();
 
   const sortedProducts = useMemo(() => {
-    const sorted = [...filteredProducts];
+    const sorted = [...products];
 
     switch (sortOption) {
       case "price-low":
@@ -40,7 +34,7 @@ function ProductsPage() {
     }
 
     return sorted;
-  }, [filteredProducts, sortOption]);
+  }, [products, sortOption]);
 
   if (loading) {
     return <h2>Loading Products</h2>;

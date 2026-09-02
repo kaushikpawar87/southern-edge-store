@@ -4,20 +4,41 @@ import { useState, useEffect } from "react";
 function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
     async function fetchProducts() {
       try {
         setLoading(true);
+        setError("");
 
-        let url = "http://localhost:3000/api/products";
+        const params = new URLSearchParams();
 
         if (selectedBrand !== "All") {
-          url += `?brand=${selectedBrand}`;
+          params.append("brand", selectedBrand);
         }
+
+        if (debouncedSearch) {
+          params.append("search", debouncedSearch);
+        }
+
+        const queryString = params.toString();
+
+        const url = `http://localhost:3000/api/products${queryString ? `?${queryString}` : ""}`;
 
         const response = await fetch(url);
         if (!response.ok) {
@@ -35,7 +56,7 @@ function ProductProvider({ children }) {
       }
     }
     fetchProducts();
-  }, [selectedBrand]);
+  }, [selectedBrand, debouncedSearch]);
 
   useEffect(() => {
     async function fetchProductBrands() {
@@ -66,6 +87,8 @@ function ProductProvider({ children }) {
         error,
         selectedBrand,
         setSelectedBrand,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {children}
