@@ -6,6 +6,7 @@ function ProductProvider({ children }) {
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [sortOption, setSortOption] = useState("featured");
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -36,6 +37,12 @@ function ProductProvider({ children }) {
           params.append("search", debouncedSearch);
         }
 
+        if (sortOption === "price-low") {
+          params.append("sort", "price");
+        } else if (sortOption === "price-high") {
+          params.append("sort", "-price");
+        }
+
         const queryString = params.toString();
 
         const url = `http://localhost:3000/api/products${queryString ? `?${queryString}` : ""}`;
@@ -56,7 +63,7 @@ function ProductProvider({ children }) {
       }
     }
     fetchProducts();
-  }, [selectedBrand, debouncedSearch]);
+  }, [selectedBrand, debouncedSearch, sortOption]);
 
   useEffect(() => {
     async function fetchProductBrands() {
@@ -89,6 +96,8 @@ function ProductProvider({ children }) {
         setSelectedBrand,
         searchTerm,
         setSearchTerm,
+        sortOption,
+        setSortOption,
       }}
     >
       {children}

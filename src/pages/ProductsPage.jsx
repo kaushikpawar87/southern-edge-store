@@ -1,10 +1,9 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import ProductCard from "../components/ProductCard";
 import "../styles/products-page.css";
 import { useProducts } from "../context/hooks/useProducts";
 
 function ProductsPage() {
-  const [sortOption, setSortOption] = useState("featured");
   const {
     products,
     brands,
@@ -14,20 +13,14 @@ function ProductsPage() {
     setSelectedBrand,
     searchTerm,
     setSearchTerm,
+    sortOption,
+    setSortOption,
   } = useProducts();
 
   const sortedProducts = useMemo(() => {
     const sorted = [...products];
 
     switch (sortOption) {
-      case "price-low":
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-
-      case "price-high":
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-
       case "name":
         sorted.sort((a, b) => a.name.localeCompare(b.name));
         break;
