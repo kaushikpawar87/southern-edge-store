@@ -48,7 +48,14 @@ FROM products
     query += ` ORDER BY price ASC`;
   } else if (sort === "-price") {
     query += ` ORDER BY price DESC`;
+  } else if (sort === "name") {
+    query += ` ORDER BY name ASC`;
+  } else if (sort === "-name") {
+    query += ` ORDER BY name DESC`;
+  } else {
+    query += ` ORDER BY id ASC`;
   }
+
   const filterValues = [...values];
 
   values.push(limitNumber);

@@ -1,4 +1,4 @@
-const allowedSortValues = ["price", "-price"];
+const allowedSortValues = ["price", "-price", "name", "-name"];
 
 export function validateProductQuery(req, res, next) {
   const { page, limit, sort } = req.query;

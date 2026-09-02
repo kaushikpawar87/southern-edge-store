@@ -41,6 +41,8 @@ function ProductProvider({ children }) {
           params.append("sort", "price");
         } else if (sortOption === "price-high") {
           params.append("sort", "-price");
+        } else if (sortOption === "name") {
+          params.append("sort", "name");
         }
 
         const queryString = params.toString();

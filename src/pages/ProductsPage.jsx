@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import ProductCard from "../components/ProductCard";
 import "../styles/products-page.css";
 import { useProducts } from "../context/hooks/useProducts";
@@ -16,18 +15,6 @@ function ProductsPage() {
     sortOption,
     setSortOption,
   } = useProducts();
-
-  const sortedProducts = useMemo(() => {
-    const sorted = [...products];
-
-    switch (sortOption) {
-      case "name":
-        sorted.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-    }
-
-    return sorted;
-  }, [products, sortOption]);
 
   if (loading) {
     return <h2>Loading Products</h2>;
@@ -67,17 +54,17 @@ function ProductsPage() {
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-      {sortedProducts.length === 0 ? (
+      {products.length === 0 ? (
         <div className="no-results">
           <h2>No products found</h2>
           <p>Try adjusting you search or filter.</p>
         </div>
       ) : (
         <>
-          <p>Showing {sortedProducts.length} products.</p>
+          <p>Showing {products.length} products.</p>
 
           <div className="products-grid">
-            {sortedProducts.map((product) => (
+            {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
