@@ -9,11 +9,14 @@ function ProductsPage() {
     loading,
     error,
     selectedBrand,
-    setSelectedBrand,
+    changeBrand,
     searchTerm,
     setSearchTerm,
     sortOption,
-    setSortOption,
+    changeSort,
+    pagination,
+    currentPage,
+    setCurrentPage,
   } = useProducts();
 
   if (loading) {
@@ -29,7 +32,7 @@ function ProductsPage() {
       <select
         name="Filter Brands"
         value={selectedBrand}
-        onChange={(event) => setSelectedBrand(event.target.value)}
+        onChange={(event) => changeBrand(event.target.value)}
       >
         <option value="All">All Brands</option>
         {brands.map((brand) => (
@@ -41,7 +44,7 @@ function ProductsPage() {
       <select
         name="sort"
         value={sortOption}
-        onChange={(event) => setSortOption(event.target.value)}
+        onChange={(event) => changeSort(event.target.value)}
       >
         <option value="featured">Featured</option>
         <option value="price-low">Price: Low to High</option>
@@ -69,6 +72,25 @@ function ProductsPage() {
             ))}
           </div>
         </>
+      )}
+      {products.length > 0 && (
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {pagination.totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === pagination.totalPages}
+          >
+            Next
+          </button>
+        </div>
       )}
     </section>
   );

@@ -2,7 +2,15 @@ import ProductContext from "./ProductsContext";
 import { useState, useEffect } from "react";
 
 function ProductProvider({ children }) {
+  // State
   const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    limit: 5,
+    totalProducts: 0,
+    totalPages: 1,
+  });
+  const [currentPage, setCurrentPage] = useState(1);
   const [selectedBrand, setSelectedBrand] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -11,6 +19,19 @@ function ProductProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Handler Functions
+  function changeBrand(brand) {
+    setSelectedBrand(brand);
+    setCurrentPage(1);
+  }
+
+  function changeSort(option) {
+    setSortOption(option);
+    setCurrentPage(1);
+  }
+  // Effects
+
+  // Search Debounce
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(searchTerm);
@@ -21,6 +42,7 @@ function ProductProvider({ children }) {
     };
   }, [searchTerm]);
 
+  // Fetch Products
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -28,6 +50,8 @@ function ProductProvider({ children }) {
         setError("");
 
         const params = new URLSearchParams();
+
+        params.append("page", String(currentPage));
 
         if (selectedBrand !== "All") {
           params.append("brand", selectedBrand);
@@ -57,6 +81,7 @@ function ProductProvider({ children }) {
         const data = await response.json();
 
         setProducts(data.products);
+        setPagination(data.pagination);
       } catch (error) {
         console.log(error);
         setError("Products failed to load");
@@ -65,8 +90,9 @@ function ProductProvider({ children }) {
       }
     }
     fetchProducts();
-  }, [selectedBrand, debouncedSearch, sortOption]);
+  }, [selectedBrand, debouncedSearch, sortOption, currentPage]);
 
+  // Fetch Brands
   useEffect(() => {
     async function fetchProductBrands() {
       try {
@@ -87,6 +113,7 @@ function ProductProvider({ children }) {
     fetchProductBrands();
   }, []);
 
+  // Provider
   return (
     <ProductContext.Provider
       value={{
@@ -95,11 +122,14 @@ function ProductProvider({ children }) {
         loading,
         error,
         selectedBrand,
-        setSelectedBrand,
+        changeBrand,
         searchTerm,
         setSearchTerm,
         sortOption,
-        setSortOption,
+        changeSort,
+        pagination,
+        currentPage,
+        setCurrentPage,
       }}
     >
       {children}
