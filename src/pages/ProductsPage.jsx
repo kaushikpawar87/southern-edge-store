@@ -26,6 +26,9 @@ function ProductsPage() {
   if (error) {
     return <h2>Failed to Load Products</h2>;
   }
+
+  const startProduct = (currentPage - 1) * pagination.limit + 1;
+  const endProduct = (currentPage - 1) * pagination.limit + products.length;
   return (
     <section>
       <h1>All products</h1>
@@ -37,7 +40,7 @@ function ProductsPage() {
         <option value="All">All Brands</option>
         {brands.map((brand) => (
           <option key={brand} value={brand}>
-            {brand === "All" ? "All brands" : brand}
+            {brand}
           </option>
         ))}
       </select>{" "}
@@ -64,7 +67,10 @@ function ProductsPage() {
         </div>
       ) : (
         <>
-          <p>Showing {products.length} products.</p>
+          <p>
+            Showing {startProduct} - {endProduct} of {pagination.totalProducts}{" "}
+            products.
+          </p>
 
           <div className="products-grid">
             {products.map((product) => (
