@@ -77,26 +77,24 @@ function ProductsPage() {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {pagination.totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === pagination.totalPages}
+            >
+              Next
+            </button>
+          </div>
         </>
-      )}
-      {products.length > 0 && (
-        <div className="pagination">
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {pagination.totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === pagination.totalPages}
-          >
-            Next
-          </button>
-        </div>
       )}
     </section>
   );
